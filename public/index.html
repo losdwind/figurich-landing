@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数字狂徒 Figurich | 反算法实验室</title>
+
+    <!-- 引入字体 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+20&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#543D71',
+                        'primary-dark': '#3E2D53',
+                        'primary-container': '#DCD0F0',
+                        surface: '#FFFFFF',
+                        background: '#F0EAFF',
+                        outline: '#2D2A33',
+                    },
+                    fontFamily: {
+                        sans: ['Noto Sans SC', 'sans-serif'],
+                        jersey: ['Jersey 20', 'sans-serif'],
+                        mono: ['Space Mono', 'monospace'],
+                    },
+                    boxShadow: {
+                        'pixel': '4px 4px 0px 0px #543D71',
+                        'pixel-hover': '2px 2px 0px 0px #543D71',
+                    },
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* 全局背景 */
+        body {
+            background-color: #F0EAFF;
+            background-image: 
+                linear-gradient(rgba(84, 61, 113, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(84, 61, 113, 0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+            color: #2D2A33;
+            transition: all 0.3s ease;
+        }
+
+        /* --- 严格的语言显示逻辑 --- */
+        .zh-text, .en-text { display: none !important; }
+        
+        /* 中文模式 */
+        body.mode-zh .zh-text { display: block !important; }
+        body.mode-zh span.zh-text { display: inline !important; }
+        body.mode-zh .zh-flex { display: flex !important; }
+        body.mode-zh .en-text, body.mode-zh .en-flex { display: none !important; }
+        
+        /* 英文模式 */
+        body.mode-en .en-text { display: block !important; }
+        body.mode-en span.en-text { display: inline !important; }
+        body.mode-en .en-flex { display: flex !important; }
+        body.mode-en .zh-text, body.mode-en .zh-flex { display: none !important; }
+
+        /* --- 字体逻辑 --- */
+        /* 中文模式：Noto Sans SC Black (超粗) */
+        body.mode-zh { font-family: 'Noto Sans SC', sans-serif; }
+        body.mode-zh .display-font { font-family: 'Noto Sans SC', sans-serif; font-weight: 900; letter-spacing: -0.05em; }
+        body.mode-zh .brand-name { font-family: 'Noto Sans SC', sans-serif; font-weight: 900; letter-spacing: -0.02em; }
+        
+        /* 英文模式：Jersey 20 */
+        body.mode-en { font-family: 'Space Mono', monospace; }
+        body.mode-en .display-font { font-family: 'Jersey 20', sans-serif; letter-spacing: normal; }
+        body.mode-en .brand-name { font-family: 'Jersey 20', sans-serif; letter-spacing: 0.05em; }
+
+        /* --- 组件样式 --- */
+        .section { padding: 80px 24px; max-width: 1000px; margin: 0 auto; }
+
+        .pixel-card {
+            background: #FFFFFF; border: 2px solid #543D71;
+            box-shadow: 4px 4px 0px 0px #543D71; transition: all 0.2s steps(2);
+        }
+        .pixel-card:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0px 0px #543D71; }
+
+        .pixel-btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 12px 24px; background: #543D71; color: #FFFFFF;
+            border: 2px solid #543D71; 
+            font-size: 16px; text-transform: uppercase;
+            box-shadow: 4px 4px 0px 0px rgba(0,0,0,0.2); transition: all 0.1s linear;
+            cursor: pointer; text-decoration: none;
+        }
+        .pixel-btn:hover { background: #6a4d8f; transform: translate(2px, 2px); box-shadow: 2px 2px 0px 0px rgba(0,0,0,0.2); }
+        .pixel-btn:active { transform: translate(4px, 4px); box-shadow: none; }
+
+        .pixel-btn-outline { background: transparent; color: #543D71; box-shadow: 4px 4px 0px 0px #543D71; }
+        .pixel-btn-outline:hover { background: #DCD0F0; }
+
+        .separator-line { height: 2px; background: #543D71; position: relative; margin: 40px 0; }
+        .separator-line::after, .separator-line::before {
+            content: ''; position: absolute; width: 10px; height: 10px; background: #543D71; top: -4px;
+        }
+        .separator-line::after { right: 0; } .separator-line::before { left: 0; }
+
+        .accordion-item { border-bottom: 2px solid #E5E5E5; }
+        .accordion-header {
+            width: 100%; padding: 20px; text-align: left; background: none; border: none; cursor: pointer;
+            display: flex; justify-content: space-between; align-items: center; font-size: 18px; transition: background 0.2s;
+        }
+        .accordion-header:hover { background: #F3F0F7; }
+        .accordion-content {
+            max-height: 0; overflow: hidden; transition: max-height 0.3s cubic-bezier(0, 1, 0, 1);
+            padding: 0 20px; background: #F9F8FC; border-left: 4px solid #543D71;
+        }
+        .accordion-content.active { max-height: 500px; padding-bottom: 20px; padding-top: 10px; border-bottom: 2px solid #543D71; }
+
+        .tech-tag {
+            background: #DCD0F0; border: 1px solid #543D71; padding: 2px 8px;
+            font-size: 12px; color: #543D71; font-weight: bold;
+        }
+        
+        .lang-toggle {
+            cursor: pointer; border: 2px solid #543D71; padding: 4px 8px;
+            font-weight: bold; font-size: 14px;
+            background: white; transition: all 0.2s;
+        }
+        .lang-toggle:hover { background: #DCD0F0; }
+        .lang-toggle span.active { background: #543D71; color: white; padding: 0 4px; }
+
+        /* 隐藏输入框的默认样式 */
+        input:focus { outline: none; }
+    </style>
+</head>
+
+<body class="mode-zh">
+
+    <!-- 导航栏 -->
+    <nav style="position: sticky; top: 0; background: rgba(240, 234, 255, 0.95); z-index: 100; backdrop-filter: blur(10px); border-bottom: 2px solid #543D71;">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="w-4 h-4 bg-primary"></div>
+                <!-- 品牌名 -->
+                <div class="text-2xl brand-name text-primary tracking-wide">
+                    <span class="zh-text">数字狂徒</span>
+                    <span class="en-text">FIGURICH</span>
+                    <span class="font-mono text-sm align-middle ml-1">
+                        <span class="zh-text">1.0版</span>
+                        <span class="en-text">v1.0</span>
+                    </span>
+                </div>
+            </div>
+            
+            <div class="hidden md:flex gap-8 text-lg font-bold">
+                <a href="#about" class="text-primary hover:underline decoration-2 underline-offset-4">
+                    <span class="zh-text">痛点</span>
+                    <span class="en-text">PAIN POINTS</span>
+                </a>
+                <a href="#roadmap" class="text-primary hover:underline decoration-2 underline-offset-4">
+                    <span class="zh-text">方法论</span>
+                    <span class="en-text">METHODOLOGY</span>
+                </a>
+                <a href="#gear" class="text-primary hover:underline decoration-2 underline-offset-4">
+                    <span class="zh-text">装备</span>
+                    <span class="en-text">GEAR</span>
+                </a>
+            </div>
+            
+            <div class="flex items-center gap-4">
+                <button class="lang-toggle" onclick="toggleLanguage()">
+                    <span class="zh-text"><span class="active">中文</span> / EN</span>
+                    <span class="en-text">CN / <span class="active">EN</span></span>
+                </button>
+                <a href="#cta" class="pixel-btn hidden sm:inline-flex" style="padding: 6px 16px; font-size: 14px;">
+                    <span class="zh-text">立即订阅</span>
+                    <span class="en-text">SUBSCRIBE</span>
+                </a>
+                <button id="mobile-menu-btn" class="md:hidden p-2 border-2 border-primary text-primary flex items-center justify-center">
+                    <!-- 菜单图标 SVG -->
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden border-b-2 border-primary bg-background p-4">
+            <div class="flex flex-col gap-4">
+                <a href="#about" class="block text-primary font-bold">
+                    <span class="zh-text">痛点</span><span class="en-text">PAIN POINTS</span>
+                </a>
+                <a href="#roadmap" class="block text-primary font-bold">
+                    <span class="zh-text">方法论</span><span class="en-text">METHODOLOGY</span>
+                </a>
+                <a href="#gear" class="block text-primary font-bold">
+                    <span class="zh-text">装备</span><span class="en-text">GEAR</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="section text-center min-h-[85vh] flex flex-col justify-center items-center">
+        <div class="text-primary mb-4 text-sm tracking-widest uppercase font-bold">
+            <span class="zh-text">[ 系统状态：过载 ]</span>
+            <span class="en-text">[ SYSTEM STATUS: OVERLOADED ]</span>
+        </div>
+        
+        <h1 class="text-6xl md:text-8xl text-primary mb-6 display-font leading-none">
+            <span class="zh-text">注意力<br>被劫持</span>
+            <span class="en-text">ATTENTION<br>HIJACKED</span>
+        </h1>
+        
+        <h2 class="text-3xl md:text-5xl text-primary mb-8 leading-tight font-bold">
+            <span class="zh-text">努力被分散，赚钱就很难</span>
+            <span class="en-text">Effort Scattered // Profit Hindered</span>
+        </h2>
+
+        <div class="pixel-card p-6 max-w-2xl mx-auto mb-10 text-left bg-white relative">
+            <div class="absolute -top-3 -left-3 bg-primary text-white px-2 py-1 text-xs border border-primary font-bold">
+                <span class="zh-text">当前任务</span>
+                <span class="en-text">MISSION_OBJ</span>
+            </div>
+            
+            <div class="zh-text text-lg leading-relaxed text-gray-800">
+                <strong class="text-primary">数字狂徒</strong> 的任务：<br>
+                切掉"廉价输入"，找回"高价值输出"。<br>
+                用数字极简清场，用 AI 守住边界，再把天赋变成能持续产出的个人品牌。
+            </div>
+            
+            <div class="en-text text-lg leading-relaxed text-gray-800">
+                <strong class="text-primary">Figurich</strong>'s Directive:<br>
+                Cut "cheap input," reclaim "high-value output."<br>
+                Clear the noise with digital minimalism, guard boundaries with AI, and transform talent into a sustainable personal brand.
+            </div>
+        </div>
+
+        <div class="w-full max-w-md mx-auto mb-12 text-sm text-left border-l-2 border-primary pl-4 py-2 bg-primary/5 font-mono">
+            <div class="flex items-center gap-2 mb-2 text-primary">
+                <!-- 终端图标 SVG -->
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                <span class="font-bold zh-text">实时日志:</span>
+                <span class="font-bold en-text">LIVE_LOG:</span>
+            </div>
+            <div class="space-y-1 opacity-80 zh-text">
+                <p>> [完成] 数字断舍离指南...发放中</p>
+                <p>> [完成] 实验室订阅...新增 2 位同类</p>
+                <p>> [完成] 1-on-1 深聊...已归档 2 次</p>
+                <p class="animate-pulse">> 等待指令输入_</p>
+            </div>
+            <div class="space-y-1 opacity-80 en-text">
+                <p>> [OK] Digital Declutter Guide...Dispatching</p>
+                <p>> [OK] Lab Subscription...New Peers Added</p>
+                <p>> [OK] 1-on-1 Deep Dives...Archived</p>
+                <p class="animate-pulse">> Awaiting Input_</p>
+            </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-6 justify-center">
+            <a href="#cta" class="pixel-btn text-lg">
+                <span class="zh-text">订阅实验室</span>
+                <span class="en-text">JOIN THE LAB</span>
+            </a>
+            <a href="#about" class="pixel-btn pixel-btn-outline text-lg">
+                <span class="zh-text">了解更多</span>
+                <span class="en-text">READ MORE</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- 痛点 Section -->
+    <section id="about" class="section">
+        <div class="separator-line"></div>
+        <h2 class="text-4xl text-center mb-2 font-bold display-font">
+            <span class="zh-text">系统错误：注意力溢出</span>
+            <span class="en-text">System Error: Focus Overflow</span>
+        </h2>
+        <p class="text-center text-primary/60 mb-12 text-sm font-bold">
+            <span class="zh-text">错误代码: 404_找不到聚焦点</span>
+            <span class="en-text">ERROR_CODE: 404_FOCUS_NOT_FOUND</span>
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Card 1 -->
+            <div class="pixel-card p-6 group">
+                <div class="flex justify-between items-start mb-4">
+                    <!-- SVG 图标 (英文模式显示) -->
+                    <div class="en-text">
+                        <svg class="w-10 h-10 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    
+                    <span class="tech-tag zh-text">状态：超时</span>
+                    <span class="tech-tag en-text">TIMEOUT</span>
+                </div>
+                <h3 class="text-xl font-bold mb-2">
+                    <span class="zh-text">时间黑洞</span>
+                    <span class="en-text">Time Black Hole</span>
+                </h3>
+                <p class="text-gray-600">
+                    <span class="zh-text">打开手机查资料，回过神已过去 40 分钟。你的大脑内存被无关进程占满。</span>
+                    <span class="en-text">Grab phone to check one thing, 40 minutes later, realize RAM is full of irrelevant processes.</span>
+                </p>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="pixel-card p-6 group">
+                <div class="flex justify-between items-start mb-4">
+                    <div class="en-text">
+                        <svg class="w-10 h-10 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg>
+                    </div>
+                    
+                    <span class="tech-tag zh-text">状态：存储已满</span>
+                    <span class="tech-tag en-text">STORAGE_FULL</span>
+                </div>
+                <h3 class="text-xl font-bold mb-2">
+                    <span class="zh-text">收藏夹松鼠症</span>
+                    <span class="en-text">Hoarder's Archive</span>
+                </h3>
+                <p class="text-gray-600">
+                    <span class="zh-text">收藏夹塞满"干货"，真正动手的那天永远推迟。典型的伪勤奋缓存。</span>
+                    <span class="en-text">Favorites full of 'gems,' but the day to act is always postponed. Classic pseudo-diligence caching.</span>
+                </p>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="pixel-card p-6 group">
+                <div class="flex justify-between items-start mb-4">
+                    <div class="en-text">
+                        <svg class="w-10 h-10 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                    </div>
+                    
+                    <span class="tech-tag zh-text">状态：系统过载</span>
+                    <span class="tech-tag en-text">OVERLOAD</span>
+                </div>
+                <h3 class="text-xl font-bold mb-2">
+                    <span class="zh-text">AI 信息过载</span>
+                    <span class="en-text">AI Info Overload</span>
+                </h3>
+                <p class="text-gray-600">
+                    <span class="zh-text">垃圾内容像洪水。在算法制造的噪音里，认真表达看起来像是在裸泳。</span>
+                    <span class="en-text">Garbage content floods in. In algorithmic noise, sincere expression looks like streaking.</span>
+                </p>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="pixel-card p-6 group">
+                <div class="flex justify-between items-start mb-4">
+                    <div class="en-text">
+                        <svg class="w-10 h-10 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    </div>
+                    
+                    <span class="tech-tag zh-text">状态：电量不足</span>
+                    <span class="tech-tag en-text">LOW_BATTERY</span>
+                </div>
+                <h3 class="text-xl font-bold mb-2">
+                    <span class="zh-text">意志力枯竭</span>
+                    <span class="en-text">Willpower Depleted</span>
+                </h3>
+                <p class="text-gray-600">
+                    <span class="zh-text">想改变，但不想再靠意志力硬扛。你需要的是外挂，不是鸡汤。</span>
+                    <span class="en-text">Want change, but refuse to rely on brute force. You need an exploit, not just motivation.</span>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 方法论 Section -->
+    <section id="roadmap" class="section">
+        <h2 class="text-4xl text-center mb-12 font-bold display-font">
+            <span class="zh-text">重构协议：三步走</span>
+            <span class="en-text">Protocol Refactor: 3 Steps</span>
+        </h2>
+
+        <div class="space-y-6 relative">
+            <div class="hidden md:block absolute left-[50%] top-0 bottom-0 w-0.5 bg-primary -translate-x-1/2 z-0"></div>
+
+            <!-- Step 1 -->
+            <div class="relative z-10 flex flex-col md:flex-row items-center gap-6">
+                <div class="md:w-1/2 flex md:justify-end">
+                    <div class="pixel-card p-6 w-full md:max-w-sm bg-white">
+                        <div class="flex items-center gap-3 mb-3 border-b border-primary/20 pb-2">
+                            <span class="text-3xl brand-name text-primary">01</span>
+                            <h3 class="font-bold text-xl">
+                                <span class="zh-text">断流</span>
+                                <span class="en-text">BLOCK / Disrupt Flow</span>
+                            </h3>
+                        </div>
+                        <p class="text-sm">
+                            <span class="zh-text">关掉 90% 的干扰源。没有完整的 30 分钟，很难有真正的作品。先执行《数字断舍离指南》。</span>
+                            <span class="en-text">Shut down 90% of distractions. True output needs at least 30 uninterrupted minutes. Start with the 'Digital Declutter Guide.'</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="w-8 h-8 bg-primary border-4 border-white outline outline-2 outline-primary rounded-none rotate-45 flex-shrink-0"></div>
+                <div class="md:w-1/2 pl-4 md:pl-0">
+                    <div class="text-xs text-primary/60 font-bold">
+                        <span class="zh-text">状态：初始化中...</span>
+                        <span class="en-text">STATUS: INITIALIZING...</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="relative z-10 flex flex-col md:flex-row-reverse items-center gap-6">
+                <div class="md:w-1/2 flex md:justify-start">
+                    <div class="pixel-card p-6 w-full md:max-w-sm bg-white">
+                        <div class="flex items-center gap-3 mb-3 border-b border-primary/20 pb-2">
+                            <span class="text-3xl brand-name text-primary">02</span>
+                            <h3 class="font-bold text-xl">
+                                <span class="zh-text">立核</span>
+                                <span class="en-text">CORE / Find Node</span>
+                            </h3>
+                        </div>
+                        <p class="text-sm">
+                            <span class="zh-text">用深度访谈把"我是谁"从感觉变成句子。知道自己擅长什么，才知道该输出什么、该跟谁说话。</span>
+                            <span class="en-text">Turn 'Who am I?' from a feeling into sentences via deep dives. Know your strengths to define your output and audience.</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="w-8 h-8 bg-white border-4 border-primary rounded-none rotate-45 flex-shrink-0"></div>
+                <div class="md:w-1/2 pr-4 md:pr-0 md:text-right">
+                    <div class="text-xs text-primary/60 font-bold">
+                        <span class="zh-text">状态：等待中...</span>
+                        <span class="en-text">STATUS: PENDING...</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="relative z-10 flex flex-col md:flex-row items-center gap-6">
+                <div class="md:w-1/2 flex md:justify-end">
+                    <div class="pixel-card p-6 w-full md:max-w-sm bg-white">
+                        <div class="flex items-center gap-3 mb-3 border-b border-primary/20 pb-2">
+                            <span class="text-3xl brand-name text-primary">03</span>
+                            <h3 class="font-bold text-xl">
+                                <span class="zh-text">自动化</span>
+                                <span class="en-text">AUTO / Systemize</span>
+                            </h3>
+                        </div>
+                        <p class="text-sm">
+                            <span class="zh-text">用 AI 工具、Claude Skills、Agent Workflow 把输出做成可复用的系统。风格统一、像自己、能持续。</span>
+                            <span class="en-text">Use AI tools, Claude Skills, and Agent Workflows to build reusable output systems. Consistent style, authentic voice, sustainable.</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="w-8 h-8 bg-white border-4 border-primary rounded-none rotate-45 flex-shrink-0"></div>
+                <div class="md:w-1/2 pl-4 md:pl-0">
+                    <div class="text-xs text-primary/60 font-bold">
+                        <span class="zh-text">状态：锁定</span>
+                        <span class="en-text">STATUS: LOCKED</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 装备 Section -->
+    <section id="gear" class="section">
+        <div class="separator-line"></div>
+        <div class="flex items-center justify-center gap-4 mb-8">
+            <!-- 背包图标 SVG -->
+            <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+            <h2 class="text-4xl text-center font-bold display-font">
+                <span class="zh-text">装备库清单</span>
+                <span class="en-text">Arsenal Inventory</span>
+            </h2>
+        </div>
+        <p class="text-center text-primary/60 mb-12 text-sm max-w-lg mx-auto font-bold">
+            <span class="zh-text">// 不是课程堆叠，而是能直接上手的 .exe 工具和 .json 配置</span>
+            <span class="en-text">// Not course bundles, but ready-to-deploy .exe tools & .json configs</span>
+        </p>
+
+        <div class="pixel-card max-w-3xl mx-auto overflow-hidden">
+            <!-- Gear 1 -->
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    <span class="flex items-center gap-3">
+                        <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                        <strong class="zh-text">数字断舍离指南.pdf</strong>
+                        <strong class="en-text">Digital Declutter Guide.pdf</strong>
+                    </span>
+                    <!-- 加号 SVG -->
+                    <svg class="w-5 h-5 icon-toggle" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                </button>
+                <div class="accordion-content">
+                    <p class="mb-2 text-sm font-bold text-primary">
+                        <span class="zh-text">效果：关掉 90% 的消耗开关。</span>
+                        <span class="en-text">Effect: Switch off 90% of drain points.</span>
+                    </p>
+                    <div class="tech-tag inline-block">
+                        <span class="zh-text">包含：5页 PDF + 执行清单模板</span>
+                        <span class="en-text">Includes: 5pg PDF + Checklist</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gear 2 -->
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    <span class="flex items-center gap-3">
+                        <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+                        <strong class="zh-text">氛围感学习场改造方案</strong>
+                        <strong class="en-text">Vibe Learning Setup</strong>
+                    </span>
+                    <svg class="w-5 h-5 icon-toggle" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                </button>
+                <div class="accordion-content">
+                    <p class="mb-2 text-sm font-bold text-primary">
+                        <span class="zh-text">效果：物理环境黑客化。</span>
+                        <span class="en-text">Effect: Environmental Hacking.</span>
+                    </p>
+                    <div class="tech-tag inline-block">
+                        <span class="zh-text">包含：环境配置清单 + 节奏方案</span>
+                        <span class="en-text">Includes: Layout Config + Rhythm</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gear 3 -->
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    <span class="flex items-center gap-3">
+                        <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        <strong class="zh-text">Claude 技能: AI 守卫</strong>
+                        <strong class="en-text">Claude Skill: AI Guardian</strong>
+                    </span>
+                    <svg class="w-5 h-5 icon-toggle" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                </button>
+                <div class="accordion-content">
+                    <p class="mb-2 text-sm font-bold text-primary">
+                        <span class="zh-text">效果：替你挡垃圾、筛信号。</span>
+                        <span class="en-text">Effect: Filters trash, screens signals.</span>
+                    </p>
+                    <div class="tech-tag inline-block">
+                        <span class="zh-text">包含：提示词 + 过滤规则集</span>
+                        <span class="en-text">Includes: Prompts + Ruleset</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gear 4 -->
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    <span class="flex items-center gap-3">
+                        <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                        <strong class="zh-text">Claude 技能: 深度访谈者</strong>
+                        <strong class="en-text">Claude Skill: Deep Interviewer</strong>
+                    </span>
+                    <svg class="w-5 h-5 icon-toggle" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                </button>
+                <div class="accordion-content">
+                    <p class="mb-2 text-sm font-bold text-primary">
+                        <span class="zh-text">效果：挖掘天赋原点，把感觉变成句子。</span>
+                        <span class="en-text">Effect: Unearth potential, articulate feelings.</span>
+                    </p>
+                    <div class="tech-tag inline-block">
+                        <span class="zh-text">包含：深访脚本 + 原点总结 + 价值主张</span>
+                        <span class="en-text">Includes: Script + Summary + Value Prop</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gear 5 -->
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    <span class="flex items-center gap-3">
+                        <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <strong class="zh-text">个人品牌工具包 (BrandKit)</strong>
+                        <strong class="en-text">BrandKit: Personal Brand System</strong>
+                    </span>
+                    <svg class="w-5 h-5 icon-toggle" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                </button>
+                <div class="accordion-content">
+                    <p class="mb-2 text-sm font-bold text-primary">
+                        <span class="zh-text">效果：让输出像自己、能持续。</span>
+                        <span class="en-text">Effect: Authentic output that is sustainable.</span>
+                    </p>
+                    <div class="tech-tag inline-block">
+                        <span class="zh-text">包含：定位句式 + 栏目模板 + 风格校准</span>
+                        <span class="en-text">Includes: Positioning + Templates + Style Guide</span>
+                    </div>
+                </div>
+            </div>
+
+             <!-- Gear 6 -->
+             <div class="accordion-item">
+                <button class="accordion-header">
+                    <span class="flex items-center gap-3">
+                        <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                        <strong class="zh-text">社群: 训练小组</strong>
+                        <strong class="en-text">Community: Training Squad</strong>
+                    </span>
+                    <svg class="w-5 h-5 icon-toggle" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                </button>
+                <div class="accordion-content">
+                    <p class="mb-2 text-sm font-bold text-primary">
+                        <span class="zh-text">效果：用节奏对抗内耗，不再靠热情硬扛。</span>
+                        <span class="en-text">Effect: Use rhythm to fight burnout, not willpower.</span>
+                    </p>
+                    <div class="tech-tag inline-block">
+                        <span class="zh-text">包含：训练计划 + 作业反馈 + 同类互推</span>
+                        <span class="en-text">Includes: Plans + Feedback + Peer Support</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 社交媒体矩阵 -->
+    <section class="section">
+        <h2 class="text-3xl text-center mb-8 font-bold">
+            <span class="zh-text">数据传输端口</span>
+            <span class="en-text">Data Ports</span>
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto">
+            <!-- 1. Substack -->
+            <a href="#" class="pixel-card p-4 flex items-center gap-4 hover:bg-white text-inherit no-underline group">
+                <div class="w-10 h-10 bg-primary flex items-center justify-center border-2 border-primary text-white font-bold brand-name text-xl">Sb</div>
+                <div class="flex-1">
+                    <div class="font-bold">Substack</div>
+                    <div class="text-xs text-gray-500 font-bold">
+                        <span class="zh-text">主阵地 / 实验周报 / 深度思考</span>
+                        <span class="en-text">Primary HQ / Weekly Logs / Deep Dives</span>
+                    </div>
+                </div>
+                <!-- 箭头 SVG -->
+                <svg class="w-5 h-5 text-primary group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            </a>
+
+            <!-- 2. YouTube -->
+            <a href="#" class="pixel-card p-4 flex items-center gap-4 hover:bg-white text-inherit no-underline group">
+                <div class="w-10 h-10 bg-primary flex items-center justify-center border-2 border-primary text-white font-bold brand-name text-xl">YT</div>
+                <div class="flex-1">
+                    <div class="font-bold">YouTube</div>
+                    <div class="text-xs text-gray-500 font-bold">
+                        <span class="zh-text">长视频拆解 / 装备实操</span>
+                        <span class="en-text">Video Tutorials / Gear Demos</span>
+                    </div>
+                </div>
+                <svg class="w-5 h-5 text-primary group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            </a>
+
+             <!-- 3. X -->
+             <a href="#" class="pixel-card p-4 flex items-center gap-4 hover:bg-white text-inherit no-underline group">
+                <div class="w-10 h-10 bg-primary flex items-center justify-center border-2 border-primary text-white font-bold brand-name text-xl">X</div>
+                <div class="flex-1">
+                    <div class="font-bold">X / Twitter</div>
+                    <div class="text-xs text-gray-500 font-bold">
+                        <span class="zh-text">短观点 / 实时观察 / 灵感碎片</span>
+                        <span class="en-text">Short Takes / Real-time / Fragments</span>
+                    </div>
+                </div>
+                <svg class="w-5 h-5 text-primary group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            </a>
+
+            <!-- 4. WeChat -->
+            <a href="#" class="pixel-card p-4 flex items-center gap-4 hover:bg-white text-inherit no-underline group">
+                <div class="w-10 h-10 bg-primary flex items-center justify-center border-2 border-primary text-white font-bold brand-name text-xl">WX</div>
+                <div class="flex-1">
+                    <div class="font-bold">
+                        <span class="zh-text">公众号</span>
+                        <span class="en-text">WeChat Official</span>
+                    </div>
+                    <div class="text-xs text-gray-500 font-bold">
+                        <span class="zh-text">中文长文归档</span>
+                        <span class="en-text">Long-form Archive</span>
+                    </div>
+                </div>
+                <svg class="w-5 h-5 text-primary group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            </a>
+
+            <!-- 5. Channels -->
+            <a href="#" class="pixel-card p-4 flex items-center gap-4 hover:bg-white text-inherit no-underline group">
+                <div class="w-10 h-10 bg-primary flex items-center justify-center border-2 border-primary text-white font-bold brand-name text-xl">TV</div>
+                <div class="flex-1">
+                    <div class="font-bold">
+                        <span class="zh-text">视频号</span>
+                        <span class="en-text">WeChat Channels</span>
+                    </div>
+                    <div class="text-xs text-gray-500 font-bold">
+                        <span class="zh-text">短视频版本</span>
+                        <span class="en-text">Short Videos</span>
+                    </div>
+                </div>
+                <svg class="w-5 h-5 text-primary group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            </a>
+
+            <!-- 6. Planet -->
+            <a href="#" class="pixel-card p-4 flex items-center gap-4 hover:bg-white text-inherit no-underline group">
+                <div class="w-10 h-10 bg-primary flex items-center justify-center border-2 border-primary text-white font-bold brand-name text-xl">KP</div>
+                <div class="flex-1">
+                    <div class="font-bold">
+                        <span class="zh-text">知识星球</span>
+                        <span class="en-text">Knowledge Planet</span>
+                    </div>
+                    <div class="text-xs text-gray-500 font-bold">
+                        <span class="zh-text">训练任务 / 问答 / 深水区</span>
+                        <span class="en-text">Training / Q&A / Deep Zone</span>
+                    </div>
+                </div>
+                <svg class="w-5 h-5 text-primary group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="cta" class="section py-20">
+        <div class="pixel-card p-8 md:p-12 max-w-3xl mx-auto text-center border-4">
+            <h2 class="brand-name text-6xl text-primary mb-2">
+                <span class="zh-text">准备行动</span>
+                <span class="en-text">READY?</span>
+            </h2>
+            <h3 class="text-2xl mb-8 font-bold">
+                <span class="zh-text">加入实验室，获取数字防身术</span>
+                <span class="en-text">Join the Lab, Get Digital Defense</span>
+            </h3>
+            
+            <form class="space-y-4 max-w-md mx-auto">
+                <div class="relative">
+                    <!-- 邮件图标 SVG -->
+                    <svg class="w-6 h-6 absolute left-3 top-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    
+                    <input type="email" class="zh-text w-full p-3 pl-10 border-2 border-primary bg-background font-mono focus:outline-none focus:shadow-[4px_4px_0px_0px_#543D71] transition-shadow" placeholder="请输入您的邮箱地址...">
+                    <input type="email" class="en-text w-full p-3 pl-10 border-2 border-primary bg-background font-mono focus:outline-none focus:shadow-[4px_4px_0px_0px_#543D71] transition-shadow" placeholder="Email Address...">
+                </div>
+                <button type="submit" class="pixel-btn w-full justify-center text-lg">
+                    <span class="zh-text">确认订阅</span>
+                    <span class="en-text">CONFIRM</span>
+                </button>
+                <p class="font-mono text-xs text-gray-500 mt-4">
+                    <span class="zh-text">承诺：拒绝垃圾邮件</span>
+                    <span class="en-text">NO_SPAM_GUARANTEE</span>
+                </p>
+            </form>
+            
+            <div class="mt-8 pt-6 border-t border-primary/20">
+                <a href="#" class="text-primary hover:bg-primary hover:text-white px-2 py-1 transition-colors font-bold text-sm">
+                    <span class="zh-text">[ 或者：预约 1-on-1 深聊 ]</span>
+                    <span class="en-text">[ Or: Book 1-on-1 Deep Dive ]</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#2D2A33] text-white py-12 border-t-4 border-primary mt-12">
+        <div class="max-w-4xl mx-auto px-6 text-center space-y-6">
+            <div class="flex items-center justify-center gap-2">
+                <span class="brand-name text-3xl">
+                    <span class="zh-text">数字狂徒</span>
+                    <span class="en-text">FIGURICH</span>
+                </span>
+                <span class="font-mono text-sm bg-primary px-1">2025</span>
+            </div>
+            
+            <p class="text-lg text-gray-300 font-bold">
+                <span class="zh-text">"在算法的竞技场里，做个难以预测的人。"</span>
+                <span class="en-text">"In the algorithmic arena, be unpredictable."</span>
+            </p>
+            
+            <div class="flex justify-center gap-6 text-sm text-gray-500 font-bold">
+                <a href="#" class="hover:text-white hover:underline">
+                    <span class="zh-text">关于</span><span class="en-text">About</span>
+                </a>
+                <span>|</span>
+                <a href="#" class="hover:text-white hover:underline">
+                    <span class="zh-text">隐私</span><span class="en-text">Privacy</span>
+                </a>
+                <span>|</span>
+                <a href="#" class="hover:text-white hover:underline">
+                    <span class="zh-text">日志</span><span class="en-text">Logs</span>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 自动检测浏览器语言
+            const userLang = navigator.language || navigator.userLanguage; 
+            if (userLang.startsWith('zh')) {
+                setLanguage('zh');
+            } else {
+                setLanguage('en');
+            }
+
+            // Mobile Menu
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            // 简单的菜单切换逻辑
+            mobileMenuBtn.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Accordion Logic
+            const headers = document.querySelectorAll('.accordion-header');
+            headers.forEach(header => {
+                header.addEventListener('click', () => {
+                    const content = header.nextElementSibling;
+                    const iconToggle = header.querySelector('.icon-toggle');
+                    
+                    document.querySelectorAll('.accordion-content').forEach(c => {
+                        if (c !== content && c.classList.contains('active')) {
+                            c.classList.remove('active');
+                            // 重置其他图标
+                            const otherIcon = c.previousElementSibling.querySelector('.icon-toggle');
+                            otherIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>'; // 加号
+                        }
+                    });
+
+                    content.classList.toggle('active');
+                    
+                    // 切换当前图标
+                    if (content.classList.contains('active')) {
+                        iconToggle.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path>'; // 减号
+                    } else {
+                        iconToggle.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>'; // 加号
+                    }
+                });
+            });
+        });
+
+        // 切换语言函数
+        function toggleLanguage() {
+            const body = document.body;
+            if (body.classList.contains('mode-zh')) {
+                setLanguage('en');
+            } else {
+                setLanguage('zh');
+            }
+        }
+
+        // 设置语言
+        function setLanguage(lang) {
+            const body = document.body;
+            if (lang === 'zh') {
+                body.classList.remove('mode-en');
+                body.classList.add('mode-zh');
+            } else {
+                body.classList.remove('mode-zh');
+                body.classList.add('mode-en');
+            }
+        }
+    </script>
+</body>
+</html>
