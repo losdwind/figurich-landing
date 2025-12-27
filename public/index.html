@@ -8,6 +8,8 @@
     <!-- 引入字体 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Preload Jersey 20 font for faster rendering -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Jersey+20&display=swap">
     <link href="https://fonts.googleapis.com/css2?family=Jersey+20&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
     
     <script src="https://cdn.tailwindcss.com"></script>
@@ -841,6 +843,16 @@
                 body.classList.add('mode-en');
             }
         }
+
+        // 自动检测浏览器语言并设置
+        (function detectBrowserLanguage() {
+            const lang = navigator.language || navigator.userLanguage;
+            if (lang && lang.toLowerCase().startsWith('zh')) {
+                setLanguage('zh');
+            } else {
+                setLanguage('en');
+            }
+        })();
     </script>
 </body>
 </html>
