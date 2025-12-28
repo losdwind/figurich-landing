@@ -160,13 +160,13 @@
         .pixel-card {
             background: #FFFFFF;
             border: 2px solid #543D71;
-            box-shadow: 4px 4px 0px 0px #543D71;
+            box-shadow: none;
             transition: all 0.2s steps(2);
         }
 
         .pixel-card:hover {
-            transform: translate(2px, 2px);
-            box-shadow: 2px 2px 0px 0px #543D71;
+            transform: translate(1px, 1px);
+            box-shadow: 1px 1px 0px 0px rgba(84, 61, 113, 0.35);
         }
 
         .pixel-btn {
@@ -179,7 +179,7 @@
             border: 2px solid #543D71;
             font-size: 16px;
             text-transform: uppercase;
-            box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.2);
+            box-shadow: none;
             transition: all 0.1s linear;
             cursor: pointer;
             text-decoration: none;
@@ -187,12 +187,12 @@
 
         .pixel-btn:hover {
             background: #6a4d8f;
-            transform: translate(2px, 2px);
-            box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.2);
+            transform: translate(1px, 1px);
+            box-shadow: 1px 1px 0px 0px rgba(0, 0, 0, 0.15);
         }
 
         .pixel-btn:active {
-            transform: translate(4px, 4px);
+            transform: translate(2px, 2px);
             box-shadow: none;
         }
 
@@ -278,6 +278,11 @@
             font-weight: bold;
         }
 
+        .price-tag {
+            font-size: 14px;
+            padding: 4px 10px;
+        }
+
         .lang-toggle {
             cursor: pointer;
             border: 2px solid #543D71;
@@ -296,6 +301,11 @@
             background: #543D71;
             color: white;
             padding: 0 4px;
+        }
+
+        .count-up {
+            display: inline-block;
+            min-width: 1ch;
         }
 
         .coming-soon {
@@ -438,15 +448,15 @@
                 <span class="font-bold en-text">LIVE_LOG:</span>
             </div>
             <div class="space-y-1 opacity-80 zh-text">
-                <p>> [完成] 本周行动清单...已发送</p>
-                <p>> [完成] 新手 30 分钟数字排毒...2 人打卡</p>
-                <p>> [完成] 1 对 1 定向规划...2 场结束</p>
+                <p>> [进行中] 数字排毒手册...发放中</p>
+                <p>> [完成] 新手 30 分钟数字排毒...<span class="count-up" data-target="2">0</span> 人打卡</p>
+                <p>> [完成] 1 对 1 定向规划...<span class="count-up" data-target="2">0</span> 场结束</p>
                 <p class="animate-pulse">> 你的下一步？_</p>
             </div>
             <div class="space-y-1 opacity-80 en-text">
-                <p>> [OK] Weekly Action List...Sent</p>
-                <p>> [OK] 30-min Quick Declutter...2 check-ins</p>
-                <p>> [OK] 1:1 Focus Plan...2 sessions done</p>
+                <p>> [IN PROGRESS] Digital Detox Playbook...Sending</p>
+                <p>> [OK] 30-min Digital Detox...<span class="count-up" data-target="2">0</span> check-ins</p>
+                <p>> [OK] 1:1 Focus Plan...<span class="count-up" data-target="2">0</span> sessions done</p>
                 <p class="animate-pulse">> Your next move?_</p>
             </div>
         </div>
@@ -820,6 +830,8 @@
                         </svg>
                         <strong class="zh-text">陪伴社群（Q&A）</strong>
                         <strong class="en-text">Companion Group (Q&A)</strong>
+                        <span class="tech-tag zh-text">付费</span>
+                        <span class="tech-tag en-text">PAID</span>
                     </span>
                     <svg class="w-5 h-5 icon-toggle" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
@@ -850,30 +862,81 @@
             <div class="pixel-card p-6 zh-text">
                 <h3 class="text-xl font-bold mb-3">免费内容</h3>
                 <p class="text-sm text-gray-600 mb-4">免费内容不缩水：每周一封清晰可做的专注包，直接照着做。</p>
+                <div class="flex items-center gap-2 text-xs text-gray-500 font-bold mb-3">
+                    <span>平台：</span>
+                    <span class="inline-flex items-center gap-1">
+                        <span class="w-6 h-6 flex items-center justify-center border-2 border-primary bg-white">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" aria-hidden="true" fill="#07C160">
+                                <path
+                                    d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 0 1 .213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 0 0 .167-.054l1.903-1.114a.864.864 0 0 1 .717-.098 10.16 10.16 0 0 0 2.837.403c.276 0 .543-.027.811-.05-.857-2.578.157-4.972 1.932-6.446 1.703-1.415 3.882-1.98 5.853-1.838-.576-3.583-4.196-6.348-8.596-6.348z" />
+                            </svg>
+                        </span>
+                        <span>公众号</span>
+                    </span>
+                    <span class="tech-tag">免费</span>
+                </div>
                 <div class="flex flex-col gap-3">
                     <a href="https://YOUR-WECHAT-OFFICIAL-ACCOUNT-LINK" target="_blank" rel="noopener"
                         class="pixel-btn w-full justify-center text-sm">关注公众号</a>
                 </div>
             </div>
             <div class="pixel-card p-6 en-text">
-                <h3 class="text-xl font-bold mb-3">Free</h3>
+                <h3 class="text-xl font-bold mb-3">Newsletter</h3>
                 <p class="text-sm text-gray-600 mb-4">A simple focus kit each week—clear steps you can do right away.</p>
+                <div class="flex items-center gap-2 text-xs text-gray-500 font-bold mb-3">
+                    <span>Platform:</span>
+                    <span class="inline-flex items-center gap-1">
+                        <span class="w-6 h-6 flex items-center justify-center border-2 border-primary bg-white">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" aria-hidden="true" fill="#FF6719">
+                                <path
+                                    d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z" />
+                            </svg>
+                        </span>
+                        <span>Substack</span>
+                    </span>
+                    <span class="tech-tag">FREE</span>
+                </div>
                 <div class="flex flex-col gap-3">
                     <a href="https://figurich.substack.com/" target="_blank" rel="noopener"
-                        class="pixel-btn w-full justify-center text-sm">Free Email</a>
+                        class="pixel-btn w-full justify-center text-sm">Focus Kit Email</a>
                 </div>
             </div>
             <div class="pixel-card p-6 zh-text">
                 <h3 class="text-xl font-bold mb-3">一次性购买</h3>
                 <p class="text-sm text-gray-600 mb-4">把之前的“干货”系统整理成一套：分类、索引、可直接执行的版本，一次买断。</p>
+                <div class="flex items-center gap-2 text-xs text-gray-500 font-bold mb-3">
+                    <span>平台：</span>
+                    <span class="inline-flex items-center gap-1">
+                        <span class="w-6 h-6 flex items-center justify-center border-2 border-primary bg-white">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" aria-hidden="true" fill="#07C160">
+                                <path d="M7 4h10a2 2 0 0 1 2 2v1H5V6a2 2 0 0 1 2-2zm-2 5h14l-1.2 9.6a2 2 0 0 1-2 1.4H8.2a2 2 0 0 1-2-1.4L5 9zm4 3v4m6-4v4" />
+                            </svg>
+                        </span>
+                        <span>微信小商店</span>
+                    </span>
+                    <span class="tech-tag price-tag">¥249</span>
+                </div>
                 <div class="flex flex-col gap-3">
                     <a href="https://YOUR-XIAOSHANGDIAN-BUNDLE-LINK" target="_blank" rel="noopener"
                         class="pixel-btn w-full justify-center text-sm">微信小商店购买</a>
                 </div>
             </div>
             <div class="pixel-card p-6 en-text">
-                <h3 class="text-xl font-bold mb-3">One-Time Bundle</h3>
+                <h3 class="text-xl font-bold mb-3">Ultimate Tool Bundle & Setup Guide</h3>
                 <p class="text-sm text-gray-600 mb-4">A curated system of past gems: organized, indexed, and ready to use in one purchase.</p>
+                <div class="flex items-center gap-2 text-xs text-gray-500 font-bold mb-3">
+                    <span>Platform:</span>
+                    <span class="inline-flex items-center gap-1">
+                        <span class="w-6 h-6 flex items-center justify-center border-2 border-primary bg-white">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" aria-hidden="true" fill="#FF90E8">
+                                <path
+                                    d="M21.6 7.2c-1.2-2.8-4-4.7-7.2-4.7H9.6C5.4 2.5 2 5.9 2 10.1v3.8c0 4.2 3.4 7.6 7.6 7.6h4.8c4.2 0 7.6-3.4 7.6-7.6V10c0-1-.2-1.9-.4-2.8zM10 9.5h4.2c.7 0 1.3.6 1.3 1.3s-.6 1.3-1.3 1.3H10c-.7 0-1.3-.6-1.3-1.3s.6-1.3 1.3-1.3z" />
+                            </svg>
+                        </span>
+                        <span>Gumroad</span>
+                    </span>
+                    <span class="tech-tag price-tag">$49</span>
+                </div>
                 <div class="flex flex-col gap-3">
                     <a href="https://YOUR-GUMROAD-BUNDLE-LINK" target="_blank" rel="noopener"
                         class="pixel-btn w-full justify-center text-sm">Buy on Gumroad</a>
@@ -882,6 +945,19 @@
             <div class="pixel-card p-6 zh-text">
                 <h3 class="text-xl font-bold mb-3">订阅 + 社群</h3>
                 <p class="text-sm text-gray-600 mb-4">实时反馈 + 陪伴式执行 + Q&A 答疑，保持节奏不掉线。</p>
+                <div class="flex items-center gap-2 text-xs text-gray-500 font-bold mb-3">
+                    <span>平台：</span>
+                    <span class="inline-flex items-center gap-1 coming-soon">
+                        <span class="w-6 h-6 flex items-center justify-center border-2 border-primary bg-white">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" aria-hidden="true" fill="#543D71">
+                                <path
+                                    d="M12 3a7 7 0 0 0-7 7v7a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3v-7a7 7 0 0 0-7-7zm0 2a5 5 0 0 1 5 5v7a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1v-7a5 5 0 0 1 5-5z" />
+                            </svg>
+                        </span>
+                        <span>知识星球（待开放）</span>
+                    </span>
+                    <span class="tech-tag price-tag">¥1099/月</span>
+                </div>
                 <div class="flex flex-col gap-3">
                     <a href="#" class="pixel-btn w-full justify-center text-sm coming-soon" aria-disabled="true">
                         进入知识星球（待开放）
@@ -889,8 +965,30 @@
                 </div>
             </div>
             <div class="pixel-card p-6 en-text">
-                <h3 class="text-xl font-bold mb-3">Subscription + Group</h3>
-                <p class="text-sm text-gray-600 mb-4">Real-time feedback, companion support, and Q&A to keep you on track.</p>
+                <h3 class="text-xl font-bold mb-3">VIP Group</h3>
+                <p class="text-sm text-gray-600 mb-4">1 month of real-time Q&A, A–Z guidance, daily check-ins, and companion support.</p>
+                <div class="flex items-center gap-2 text-xs text-gray-500 font-bold mb-3">
+                    <span>Platforms:</span>
+                    <span class="inline-flex items-center gap-1">
+                        <span class="w-6 h-6 flex items-center justify-center border-2 border-primary bg-white">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" aria-hidden="true" fill="#FF90E8">
+                                <path
+                                    d="M21.6 7.2c-1.2-2.8-4-4.7-7.2-4.7H9.6C5.4 2.5 2 5.9 2 10.1v3.8c0 4.2 3.4 7.6 7.6 7.6h4.8c4.2 0 7.6-3.4 7.6-7.6V10c0-1-.2-1.9-.4-2.8zM10 9.5h4.2c.7 0 1.3.6 1.3 1.3s-.6 1.3-1.3 1.3H10c-.7 0-1.3-.6-1.3-1.3s.6-1.3 1.3-1.3z" />
+                            </svg>
+                        </span>
+                        <span>Gumroad</span>
+                    </span>
+                    <span class="inline-flex items-center gap-1 coming-soon">
+                        <span class="w-6 h-6 flex items-center justify-center border-2 border-primary bg-white">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" aria-hidden="true" fill="#229ED9">
+                                <path
+                                    d="M22.5 3.5 2.9 11.2c-1.3.5-1.3 1.2-.2 1.6l5 1.6 1.9 5.8c.2.6.4.8 1 .8.4 0 .6-.2.9-.4l2.8-2.7 5.8 4.2c1.1.6 1.8.3 2.1-1l3.8-17.7c.3-1.4-.5-2-1.5-1.6z" />
+                            </svg>
+                        </span>
+                        <span>Telegram (Soon)</span>
+                    </span>
+                    <span class="tech-tag price-tag">$199/mo</span>
+                </div>
                 <div class="flex flex-col gap-3">
                     <a href="https://YOUR-GUMROAD-SUBSCRIPTION-LINK" target="_blank" rel="noopener"
                         class="pixel-btn w-full justify-center text-sm">Subscribe on Gumroad</a>
@@ -899,8 +997,8 @@
                 </div>
             </div>
         </div>
-        <div class="separator-line"></div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+        <div class="separator-line hidden"></div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto hidden">
             <div class="pixel-card p-6 zh-text">
                 <div class="font-bold mb-4">平台入口</div>
                 <div class="grid grid-cols-3 gap-3">
@@ -1059,6 +1157,22 @@
                         iconToggle.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>'; // 加号
                     }
                 });
+            });
+
+            // Live log count-up animation
+            const counters = document.querySelectorAll('.count-up');
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-target'), 10) || 0;
+                let current = 0;
+                const step = Math.max(1, Math.ceil(target / 20));
+                const tick = () => {
+                    current = Math.min(target, current + step);
+                    counter.textContent = String(current);
+                    if (current < target) {
+                        window.requestAnimationFrame(tick);
+                    }
+                };
+                window.requestAnimationFrame(tick);
             });
         });
 
