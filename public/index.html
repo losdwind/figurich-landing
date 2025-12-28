@@ -5,6 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>数字狂徒 Figurich | 反算法实验室</title>
+    <meta name="description" content="每周专注包：数字清场步骤、AI 提示词、实用工具推荐。适合独立创业者、斜杠上班族、学生与早期职场人。">
+    <meta name="description" lang="en"
+        content="Weekly focus kit with detox steps, AI prompts, and practical tools for solo founders, side-hustlers, and early-career builders.">
+    <meta property="og:title" content="Figurich | Focus Kit for Builders">
+    <meta property="og:description"
+        content="Weekly focus kit: detox steps, AI prompts, and practical tools to turn attention into output.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://YOUR-DOMAIN">
+    <meta property="og:image" content="https://YOUR-DOMAIN/logo.png">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Figurich | Focus Kit for Builders">
+    <meta name="twitter:description"
+        content="Weekly focus kit: detox steps, AI prompts, and practical tools to turn attention into output.">
+    <meta name="twitter:image" content="https://YOUR-DOMAIN/logo.png">
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="apple-touch-icon" href="logo.png">
 
     <!-- 引入字体 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -127,6 +143,11 @@
         body.mode-en .brand-name {
             font-family: 'Jersey 20', sans-serif;
             letter-spacing: 0.05em;
+        }
+
+        body.mode-en .nav-item {
+            letter-spacing: 0.12em;
+            font-size: 0.9em;
         }
 
         /* --- 组件样式 --- */
@@ -277,6 +298,12 @@
             padding: 0 4px;
         }
 
+        .coming-soon {
+            opacity: 0.6;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
         /* 隐藏输入框的默认样式 */
         input:focus {
             outline: none;
@@ -291,7 +318,7 @@
         style="position: sticky; top: 0; background: rgba(240, 234, 255, 0.95); z-index: 100; backdrop-filter: blur(10px); border-bottom: 2px solid #543D71;">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
             <div class="flex items-center gap-2">
-                <div class="w-4 h-4 bg-primary"></div>
+                <img src="logo.png" alt="Figurich Logo" class="w-10 h-10 object-contain" />
                 <!-- 品牌名 -->
                 <div class="text-2xl brand-name text-primary tracking-wide">
                     <span class="zh-text">数字狂徒</span>
@@ -303,22 +330,22 @@
                 </div>
             </div>
 
-            <div class="hidden md:flex gap-6 text-lg font-bold">
-                <a href="#about" class="text-primary hover:underline decoration-2 underline-offset-4">
+            <div class="hidden md:flex gap-8 text-lg font-bold">
+                <a href="#about" class="nav-item text-primary hover:underline decoration-2 underline-offset-4">
                     <span class="zh-text">常见困扰</span>
-                    <span class="en-text">PROBLEMS</span>
+                    <span class="en-text">STRUGGLES</span>
                 </a>
-                <a href="#roadmap" class="text-primary hover:underline decoration-2 underline-offset-4">
-                    <span class="zh-text">三步法</span>
-                    <span class="en-text">3 STEPS</span>
+                <a href="#roadmap" class="nav-item text-primary hover:underline decoration-2 underline-offset-4">
+                    <span class="zh-text">三步方案</span>
+                    <span class="en-text">3-STEP PLAN</span>
                 </a>
-                <a href="#gear" class="text-primary hover:underline decoration-2 underline-offset-4">
-                    <span class="zh-text">你会得到</span>
+                <a href="#gear" class="nav-item text-primary hover:underline decoration-2 underline-offset-4">
+                    <span class="zh-text">你能拿到</span>
                     <span class="en-text">WHAT YOU GET</span>
                 </a>
-                <a href="#cta" class="text-primary hover:underline decoration-2 underline-offset-4">
-                    <span class="zh-text">订阅</span>
-                    <span class="en-text">SUBSCRIBE</span>
+                <a href="#access" class="nav-item text-primary hover:underline decoration-2 underline-offset-4">
+                    <span class="zh-text">入口</span>
+                    <span class="en-text">GET STARTED</span>
                 </a>
             </div>
 
@@ -327,9 +354,9 @@
                     <span class="zh-text"><span class="active">中文</span> / EN</span>
                     <span class="en-text">CN / <span class="active">EN</span></span>
                 </button>
-                <a href="#cta" class="pixel-btn hidden sm:inline-flex" style="padding: 6px 16px; font-size: 14px;">
-                    <span class="zh-text">领取行动清单</span>
-                    <span class="en-text">GET ACTION LIST</span>
+                <a href="#access" class="pixel-btn hidden sm:inline-flex" style="padding: 6px 16px; font-size: 14px;">
+                    <span class="zh-text">领取每周专注包</span>
+                    <span class="en-text">GET WEEKLY FOCUS KIT</span>
                 </a>
                 <button id="mobile-menu-btn"
                     class="md:hidden p-2 border-2 border-primary text-primary flex items-center justify-center">
@@ -344,17 +371,17 @@
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="md:hidden hidden border-b-2 border-primary bg-background p-4">
             <div class="flex flex-col gap-4">
-                <a href="#about" class="block text-primary font-bold">
-                    <span class="zh-text">常见困扰</span><span class="en-text">PROBLEMS</span>
+                <a href="#about" class="nav-item block text-primary font-bold">
+                    <span class="zh-text">常见困扰</span><span class="en-text">STRUGGLES</span>
                 </a>
-                <a href="#roadmap" class="block text-primary font-bold">
-                    <span class="zh-text">三步法</span><span class="en-text">3 STEPS</span>
+                <a href="#roadmap" class="nav-item block text-primary font-bold">
+                    <span class="zh-text">三步方案</span><span class="en-text">3-STEP PLAN</span>
                 </a>
-                <a href="#gear" class="block text-primary font-bold">
-                    <span class="zh-text">你会得到</span><span class="en-text">WHAT YOU GET</span>
+                <a href="#gear" class="nav-item block text-primary font-bold">
+                    <span class="zh-text">你能拿到</span><span class="en-text">WHAT YOU GET</span>
                 </a>
-                <a href="#cta" class="block text-primary font-bold">
-                    <span class="zh-text">订阅</span><span class="en-text">SUBSCRIBE</span>
+                <a href="#access" class="nav-item block text-primary font-bold">
+                    <span class="zh-text">入口</span><span class="en-text">GET STARTED</span>
                 </a>
             </div>
         </div>
@@ -425,14 +452,18 @@
         </div>
 
         <div class="flex flex-col sm:flex-row gap-6 justify-center">
-            <a href="#cta" class="pixel-btn text-lg">
-                <span class="zh-text">领取每周行动清单</span>
-                <span class="en-text">GET THE WEEKLY ACTION LIST</span>
+            <a href="#access" class="pixel-btn text-lg">
+                <span class="zh-text">领取本周专注包</span>
+                <span class="en-text">GET THIS WEEK'S FOCUS KIT</span>
             </a>
-            <a href="#about" class="pixel-btn pixel-btn-outline text-lg">
-                <span class="zh-text">了解更多</span>
-                <span class="en-text">READ MORE</span>
+            <a href="#access" class="pixel-btn pixel-btn-outline text-lg">
+                <span class="zh-text">看看有什么</span>
+                <span class="en-text">SEE WHAT'S INSIDE</span>
             </a>
+        </div>
+        <div class="mt-4 text-xs text-primary/70 font-bold">
+            <span class="zh-text">每周 1 封：清场步骤 + AI 提示词 + 工具推荐</span>
+            <span class="en-text">1 email/week: detox step + AI prompt + tool pick</span>
         </div>
     </section>
 
@@ -441,11 +472,11 @@
         <div class="separator-line"></div>
         <h2 class="text-4xl text-center mb-2 font-bold display-font">
             <span class="zh-text">常见困扰：不是你不够努力</span>
-            <span class="en-text">Real Problems: Not a willpower issue</span>
+            <span class="en-text">Common Struggles: It's not a willpower problem</span>
         </h2>
         <p class="text-center text-primary/60 mb-12 text-sm font-bold">
             <span class="zh-text">信息太多、时间太碎、方向太乱——靠堆课程解决不了</span>
-            <span class="en-text">Too much info, no time, messy direction—buying more courses won’t fix it</span>
+            <span class="en-text">Too much input, not enough clarity—buying more courses won’t solve it.</span>
         </p>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -662,7 +693,7 @@
         </div>
         <p class="text-center text-primary/60 mb-12 text-sm max-w-lg mx-auto font-bold">
             <span class="zh-text">// 不是一堆课程，而是能直接照做的清单、模板、AI 提示词</span>
-            <span class="en-text">// Not another course pile—checklists, templates, and AI prompts you can run</span>
+            <span class="en-text">// Not another course pile—checklists, templates, and AI prompts you can run in ChatGPT, Claude, Gemini, or Notion</span>
         </p>
 
         <div class="pixel-card max-w-3xl mx-auto overflow-hidden">
@@ -675,8 +706,8 @@
                                 d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
                             </path>
                         </svg>
-                        <strong class="zh-text">数字断舍离指南</strong>
-                        <strong class="en-text">Digital Declutter Guide</strong>
+                        <strong class="zh-text">数字清场与断舍离手册</strong>
+                        <strong class="en-text">Digital Detox Playbook</strong>
                     </span>
                     <!-- 加号 SVG -->
                     <svg class="w-5 h-5 icon-toggle" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -685,12 +716,12 @@
                 </button>
                 <div class="accordion-content">
                     <p class="mb-2 text-sm font-bold text-primary">
-                        <span class="zh-text">效果：一天内关掉 90% 的无效通知。</span>
-                        <span class="en-text">Result: Switch off 90% of useless pings in one day.</span>
+                        <span class="zh-text">效果：从设备、软件、信息源到日常节奏，一套把注意力“调回自己”的设置方案。</span>
+                        <span class="en-text">Result: A full setup—from devices and apps to routines and inputs—to get your focus back.</span>
                     </p>
                     <div class="tech-tag inline-block">
-                        <span class="zh-text">包含：5 页 PDF + 打印版清单</span>
-                        <span class="en-text">Includes: 5-page PDF + printable checklist</span>
+                        <span class="zh-text">包含：设备/应用设置清单 + 日常节奏模板 + 工具与信息源推荐</span>
+                        <span class="en-text">Includes: device/app checklist + daily routine template + tools & info source picks</span>
                     </div>
                 </div>
             </div>
@@ -701,11 +732,11 @@
                     <span class="flex items-center gap-3">
                         <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4">
+                                d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
                             </path>
                         </svg>
-                        <strong class="zh-text">沉浸式学习/办公布置</strong>
-                        <strong class="en-text">Immersive work/learn setup</strong>
+                        <strong class="zh-text">AI 人生目标访谈官</strong>
+                        <strong class="en-text">AI Strengths Interviewer</strong>
                     </span>
                     <svg class="w-5 h-5 icon-toggle" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
@@ -713,12 +744,12 @@
                 </button>
                 <div class="accordion-content">
                     <p class="mb-2 text-sm font-bold text-primary">
-                        <span class="zh-text">效果：家里或寝室 1 平米变成专注位。</span>
-                        <span class="en-text">Result: Turn 1m² at home/dorm into a focus zone.</span>
+                        <span class="zh-text">效果：把“我擅长什么、我该往哪走”从感觉变成文字，输出优势清单与下一步建议。</span>
+                        <span class="en-text">Result: Turn “what I’m good at” into clear words—strengths, direction, and next steps.</span>
                     </p>
                     <div class="tech-tag inline-block">
-                        <span class="zh-text">包含：摆放图 + 可执行习惯节奏</span>
-                        <span class="en-text">Includes: Layout guide + simple habit rhythm</span>
+                        <span class="zh-text">包含：访谈脚本 + 总结模板 + 建议生成提示词</span>
+                        <span class="en-text">Includes: interview script + summary template + recommendation prompts</span>
                     </div>
                 </div>
             </div>
@@ -729,11 +760,11 @@
                     <span class="flex items-center gap-3">
                         <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                                d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z">
                             </path>
                         </svg>
-                        <strong class="zh-text">AI 守卫提示词</strong>
-                        <strong class="en-text">AI Guardian prompts</strong>
+                        <strong class="zh-text">个人品牌设计包</strong>
+                        <strong class="en-text">Personal Brand Kit</strong>
                     </span>
                     <svg class="w-5 h-5 icon-toggle" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
@@ -741,12 +772,12 @@
                 </button>
                 <div class="accordion-content">
                     <p class="mb-2 text-sm font-bold text-primary">
-                        <span class="zh-text">效果：过滤群消息、新闻，保留你需要的 10%。</span>
-                        <span class="en-text">Result: Filter chats/news, keep the useful 10%.</span>
+                        <span class="zh-text">效果：基于你的优势，生成定位、风格、栏目与落地页骨架，让你开始持续输出。</span>
+                        <span class="en-text">Result: Turn your strengths into positioning, voice, content pillars, and a landing page outline.</span>
                     </p>
                     <div class="tech-tag inline-block">
-                        <span class="zh-text">包含：可直接粘贴的提示词 + 过滤规则</span>
-                        <span class="en-text">Includes: Copy-paste prompts + filter rules</span>
+                        <span class="zh-text">包含：定位句式 + 栏目模板 + Landing Page 结构 + 风格检查表</span>
+                        <span class="en-text">Includes: positioning lines + content pillars + landing page outline + style checklist</span>
                     </div>
                 </div>
             </div>
@@ -759,8 +790,8 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
                             </svg>
-                        <strong class="zh-text">定位问答脚本</strong>
-                        <strong class="en-text">Positioning Q&A script</strong>
+                        <strong class="zh-text">内容自动化工具箱</strong>
+                        <strong class="en-text">Content Automation Toolkit</strong>
                     </span>
                     <svg class="w-5 h-5 icon-toggle" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
@@ -768,12 +799,12 @@
                 </button>
                 <div class="accordion-content">
                     <p class="mb-2 text-sm font-bold text-primary">
-                        <span class="zh-text">效果：10 分钟写出一句好介绍，别人听得懂。</span>
-                        <span class="en-text">Result: Write a clear intro in 10 minutes.</span>
+                        <span class="zh-text">效果：把内容创作拆成可复用流程：选题、草稿、润色、发布，一套自动跑起来。</span>
+                        <span class="en-text">Result: A reusable workflow for ideas → draft → polish → publish, with quality checks built in.</span>
                     </p>
                     <div class="tech-tag inline-block">
-                        <span class="zh-text">包含：提问脚本 + 价值主张模板</span>
-                        <span class="en-text">Includes: Questions + value prop template</span>
+                        <span class="zh-text">包含：提示词库 + 工作流模板 + 质量检查清单</span>
+                        <span class="en-text">Includes: prompt library + workflow templates + quality checklist</span>
                     </div>
                 </div>
             </div>
@@ -784,39 +815,11 @@
                     <span class="flex items-center gap-3">
                         <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z">
-                            </path>
-                        </svg>
-                        <strong class="zh-text">个人品牌工具包</strong>
-                        <strong class="en-text">Personal Brand Toolkit</strong>
-                    </span>
-                    <svg class="w-5 h-5 icon-toggle" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                    </svg>
-                </button>
-                <div class="accordion-content">
-                    <p class="mb-2 text-sm font-bold text-primary">
-                        <span class="zh-text">效果：让你的作品有固定栏目，别人一眼识别你。</span>
-                        <span class="en-text">Result: Create repeatable columns so people recognize you fast.</span>
-                    </p>
-                    <div class="tech-tag inline-block">
-                        <span class="zh-text">包含：栏目模板 + 标题句式 + 风格检查表</span>
-                        <span class="en-text">Includes: Column templates + headline lines + style checklist</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Gear 6 -->
-            <div class="accordion-item">
-                <button class="accordion-header">
-                    <span class="flex items-center gap-3">
-                        <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
                             </path>
                         </svg>
-                        <strong class="zh-text">小组同行</strong>
-                        <strong class="en-text">Small peer group</strong>
+                        <strong class="zh-text">陪伴社群（Q&A）</strong>
+                        <strong class="en-text">Companion Group (Q&A)</strong>
                     </span>
                     <svg class="w-5 h-5 icon-toggle" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
@@ -824,176 +827,158 @@
                 </button>
                 <div class="accordion-content">
                     <p class="mb-2 text-sm font-bold text-primary">
-                        <span class="zh-text">效果：每周 1 次同步，帮你守住节奏。</span>
-                        <span class="en-text">Result: Weekly sync so you keep the rhythm.</span>
+                        <span class="zh-text">效果：每周 Q&A + 轻量打卡 + 反馈陪跑，遇到卡点有人帮你推一把。</span>
+                        <span class="en-text">Result: Weekly Q&A, check-ins, and feedback so you don’t fall off track.</span>
                     </p>
                     <div class="tech-tag inline-block">
-                        <span class="zh-text">包含：轻量打卡 + 作业反馈 + 互相推广</span>
-                        <span class="en-text">Includes: Light check-ins + feedback + peer boost</span>
+                        <span class="zh-text">状态：待开放（订阅后优先通知）</span>
+                        <span class="en-text">Status: Coming soon (subscribers get first access)</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 社交媒体矩阵 -->
-    <section class="section">
-        <h2 class="text-3xl text-center mb-8 font-bold">
-            <span class="zh-text">更多内容更新</span>
-            <span class="en-text">Find me here</span>
+    <!-- Access Section -->
+    <section id="access" class="section">
+        <div class="separator-line"></div>
+        <h2 class="text-4xl text-center mb-8 font-bold display-font">
+            <span class="zh-text">选择你的入口</span>
+            <span class="en-text">Choose Your Entry</span>
         </h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto">
-            <!-- Substack -->
-            <a href="https://figurich.substack.com/" target="_blank" rel="noopener"
-                class="pixel-card p-4 flex items-center gap-4 hover:bg-white text-inherit no-underline group">
-                <div class="w-10 h-10 flex items-center justify-center border-2 border-primary bg-white">
-                    <svg class="w-6 h-6" viewBox="0 0 24 24" aria-hidden="true" fill="#FF6719">
-                        <path
-                            d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z" />
-                    </svg>
+        <div class="grid grid-cols-1 gap-6">
+            <div class="pixel-card p-6 zh-text">
+                <h3 class="text-xl font-bold mb-3">免费内容</h3>
+                <p class="text-sm text-gray-600 mb-4">免费内容不缩水：每周邮件 + 公众号都有“干货”，清场步骤、提示词、工具推荐都在里面。</p>
+                <div class="flex flex-col gap-3">
+                    <a href="https://YOUR-WECHAT-OFFICIAL-ACCOUNT-LINK" target="_blank" rel="noopener"
+                        class="pixel-btn w-full justify-center text-sm">关注公众号</a>
                 </div>
-                <div class="flex-1">
-                    <div class="font-bold">Substack</div>
-                    <div class="text-xs text-gray-500 font-bold">
-                        <span class="zh-text">主阵地 / 实验周报 / 深度思考</span>
-                        <span class="en-text">Primary HQ / Weekly Logs / Deep Dives</span>
-                    </div>
+            </div>
+            <div class="pixel-card p-6 en-text">
+                <h3 class="text-xl font-bold mb-3">Free</h3>
+                <p class="text-sm text-gray-600 mb-4">All the gems for free: weekly email with detox steps, prompts, and tool picks.</p>
+                <div class="flex flex-col gap-3">
+                    <a href="https://figurich.substack.com/" target="_blank" rel="noopener"
+                        class="pixel-btn w-full justify-center text-sm">Free Email</a>
                 </div>
-                <svg class="w-5 h-5 text-primary group-hover:translate-x-1 transition-transform" fill="none"
-                    stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                </svg>
-            </a>
-
-            <!-- YouTube -->
-            <a href="https://www.youtube.com/@figurich" target="_blank" rel="noopener"
-                class="pixel-card p-4 flex items-center gap-4 hover:bg-white text-inherit no-underline group">
-                <div class="w-10 h-10 flex items-center justify-center border-2 border-primary bg-white">
-                    <svg class="w-6 h-6" viewBox="0 0 24 24" aria-hidden="true" fill="#FF0000">
-                        <path
-                            d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
-                    </svg>
+            </div>
+            <div class="pixel-card p-6 zh-text">
+                <h3 class="text-xl font-bold mb-3">一次性购买</h3>
+                <p class="text-sm text-gray-600 mb-4">把之前的“干货”系统整理成一套：分类、索引、可直接执行的版本，一次买断。</p>
+                <div class="flex flex-col gap-3">
+                    <a href="https://YOUR-XIAOSHANGDIAN-BUNDLE-LINK" target="_blank" rel="noopener"
+                        class="pixel-btn w-full justify-center text-sm">微信小商店购买</a>
                 </div>
-                <div class="flex-1">
-                    <div class="font-bold">YouTube</div>
-                    <div class="text-xs text-gray-500 font-bold">
-                        <span class="zh-text">长视频拆解 / 装备实操</span>
-                        <span class="en-text">Video Tutorials / Gear Demos</span>
-                    </div>
+            </div>
+            <div class="pixel-card p-6 en-text">
+                <h3 class="text-xl font-bold mb-3">One-Time Bundle</h3>
+                <p class="text-sm text-gray-600 mb-4">A curated system of past gems: organized, indexed, and ready to use in one purchase.</p>
+                <div class="flex flex-col gap-3">
+                    <a href="https://YOUR-GUMROAD-BUNDLE-LINK" target="_blank" rel="noopener"
+                        class="pixel-btn w-full justify-center text-sm">Buy on Gumroad</a>
                 </div>
-                <svg class="w-5 h-5 text-primary group-hover:translate-x-1 transition-transform" fill="none"
-                    stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                </svg>
-            </a>
-
-            <!-- Twitter/X -->
-            <a href="https://x.com/shuzikuangtu" target="_blank" rel="noopener"
-                class="pixel-card p-4 flex items-center gap-4 hover:bg-white text-inherit no-underline group">
-                <div class="w-10 h-10 flex items-center justify-center border-2 border-primary bg-white">
-                    <svg class="w-6 h-6" viewBox="0 0 24 24" aria-hidden="true" fill="#111111">
-                        <path
-                            d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z" />
-                    </svg>
+            </div>
+            <div class="pixel-card p-6 zh-text">
+                <h3 class="text-xl font-bold mb-3">订阅 + 社群</h3>
+                <p class="text-sm text-gray-600 mb-4">实时反馈 + 陪伴式执行 + Q&A 答疑，保持节奏不掉线。</p>
+                <div class="flex flex-col gap-3">
+                    <a href="#" class="pixel-btn w-full justify-center text-sm coming-soon" aria-disabled="true">
+                        进入知识星球（待开放）
+                    </a>
                 </div>
-                <div class="flex-1">
-                    <div class="font-bold">X / Twitter</div>
-                    <div class="text-xs text-gray-500 font-bold">
-                        <span class="zh-text">短观点 / 实时观察 / 灵感碎片</span>
-                        <span class="en-text">Short Takes / Real-time / Fragments</span>
-                    </div>
+            </div>
+            <div class="pixel-card p-6 en-text">
+                <h3 class="text-xl font-bold mb-3">Subscription + Group</h3>
+                <p class="text-sm text-gray-600 mb-4">Real-time feedback, companion support, and Q&A to keep you on track.</p>
+                <div class="flex flex-col gap-3">
+                    <a href="https://YOUR-GUMROAD-SUBSCRIPTION-LINK" target="_blank" rel="noopener"
+                        class="pixel-btn w-full justify-center text-sm">Subscribe on Gumroad</a>
+                    <a href="#" class="pixel-btn pixel-btn-outline w-full justify-center text-sm coming-soon"
+                        aria-disabled="true">Telegram (Coming Soon)</a>
                 </div>
-                <svg class="w-5 h-5 text-primary group-hover:translate-x-1 transition-transform" fill="none"
-                    stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                </svg>
-            </a>
-
-            <!-- WeChat QR Code -->
-            <div class="pixel-card p-4 flex items-center gap-4 bg-white">
-                <div class="w-10 h-10 flex items-center justify-center border-2 border-primary bg-white">
-                    <svg class="w-6 h-6" viewBox="0 0 24 24" aria-hidden="true" fill="#07C160">
-                        <path
-                            d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 0 1 .213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 0 0 .167-.054l1.903-1.114a.864.864 0 0 1 .717-.098 10.16 10.16 0 0 0 2.837.403c.276 0 .543-.027.811-.05-.857-2.578.157-4.972 1.932-6.446 1.703-1.415 3.882-1.98 5.853-1.838-.576-3.583-4.196-6.348-8.596-6.348zM5.785 5.991c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178A1.17 1.17 0 0 1 4.623 7.17c0-.651.52-1.18 1.162-1.18zm5.813 0c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178 1.17 1.17 0 0 1-1.162-1.178c0-.651.52-1.18 1.162-1.18zm5.34 2.867c-1.797-.052-3.746.512-5.28 1.786-1.72 1.428-2.687 3.72-1.78 6.22.942 2.453 3.666 4.229 6.884 4.229.826 0 1.622-.12 2.361-.336a.722.722 0 0 1 .598.082l1.584.926a.272.272 0 0 0 .14.047c.134 0 .24-.111.24-.247 0-.06-.023-.12-.038-.177l-.327-1.233a.582.582 0 0 1-.023-.156.49.49 0 0 1 .201-.398C23.024 18.48 24 16.82 24 14.98c0-3.21-2.931-5.837-6.656-6.088V8.89c-.135-.01-.27-.027-.407-.03zm-2.53 3.274c.535 0 .969.44.969.982a.976.976 0 0 1-.969.983.976.976 0 0 1-.969-.983c0-.542.434-.982.97-.982zm4.844 0c.535 0 .969.44.969.982a.976.976 0 0 1-.969.983.976.976 0 0 1-.969-.983c0-.542.434-.982.969-.982z" />
-                    </svg>
-                </div>
-                <div class="flex-1">
-                    <div class="font-bold">
-                        <span class="zh-text">公众号</span>
-                        <span class="en-text">WeChat Official</span>
-                    </div>
-                    <div class="text-xs text-gray-500 font-bold">
-                        <span class="zh-text">扫码关注</span>
-                        <span class="en-text">Scan to follow</span>
-                    </div>
-                </div>
-                <img src="wechat-qrcode.jpeg" alt="WeChat QR Code"
-                    class="w-20 h-20 rounded border-2 border-primary" style="object-fit:cover;" />
             </div>
         </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section id="cta" class="section py-20">
-        <div class="pixel-card p-8 md:p-12 max-w-3xl mx-auto text-center border-4">
-            <h2 class="brand-name text-6xl text-primary mb-2">
-                <span class="zh-text">准备行动</span>
-                <span class="en-text">READY?</span>
-            </h2>
-            <h3 class="text-2xl mb-8 font-bold">
-                <span class="zh-text">订阅实验室，三样东西直接用起来</span>
-                <span class="en-text">Join the lab and start with three things</span>
-            </h3>
-
-            <div class="grid md:grid-cols-3 gap-3 text-left text-sm mb-8 font-bold">
-                <div class="pixel-card p-4">
-                    <span class="zh-text">每周 1 份行动清单</span>
-                    <span class="en-text">Weekly action list</span>
-                </div>
-                <div class="pixel-card p-4">
-                    <span class="zh-text">打印版清理/定位模板</span>
-                    <span class="en-text">Printable declutter/positioning templates</span>
-                </div>
-                <div class="pixel-card p-4">
-                    <span class="zh-text">AI 提示词和示例，直接复制</span>
-                    <span class="en-text">Copy-paste AI prompts & examples</span>
+        <div class="separator-line"></div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            <div class="pixel-card p-6 zh-text">
+                <div class="font-bold mb-4">平台入口</div>
+                <div class="grid grid-cols-3 gap-3">
+                    <a href="https://YOUR-WECHAT-OFFICIAL-ACCOUNT-LINK" target="_blank" rel="noopener"
+                        class="pixel-card p-3 text-center hover:bg-white text-inherit no-underline group">
+                        <div class="w-10 h-10 mx-auto flex items-center justify-center border-2 border-primary bg-white mb-2">
+                            <svg class="w-5 h-5" viewBox="0 0 24 24" aria-hidden="true" fill="#07C160">
+                                <path
+                                    d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 0 1 .213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 0 0 .167-.054l1.903-1.114a.864.864 0 0 1 .717-.098 10.16 10.16 0 0 0 2.837.403c.276 0 .543-.027.811-.05-.857-2.578.157-4.972 1.932-6.446 1.703-1.415 3.882-1.98 5.853-1.838-.576-3.583-4.196-6.348-8.596-6.348zM5.785 5.991c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178A1.17 1.17 0 0 1 4.623 7.17c0-.651.52-1.18 1.162-1.18zm5.813 0c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178 1.17 1.17 0 0 1-1.162-1.178c0-.651.520-1.18 1.162-1.18zm5.34 2.867c-1.797-.052-3.746.512-5.28 1.786-1.72 1.428-2.687 3.72-1.78 6.22.942 2.453 3.666 4.229 6.884 4.229.826 0 1.622-.12 2.361-.336a.722.722 0 0 1 .598.082l1.584.926a.272.272 0 0 0 .14.047c.134 0 .240-.111.24-.247 0-.06-.023-.12-.038-.177l-.327-1.233a.582.582 0 0 1-.023-.156.49.49 0 0 1 .201-.398C23.024 18.48 24 16.82 24 14.98c0-3.21-2.931-5.837-6.656-6.088V8.89c-.135-.01-.27-.027-.407-.03zm-2.53 3.274c.535 0 .969.44.969.982a.976.976 0 0 1-.969.983.976.976 0 0 1-.969-.983c0-.542.434-.982.97-.982zm4.844 0c.535 0 .969.44.969.982a.976.976 0 0 1-.969.983.976.976 0 0 1-.969-.983c0-.542.434-.982.969-.982z" />
+                            </svg>
+                        </div>
+                        <div class="text-sm font-bold">公众号</div>
+                    </a>
+                    <a href="https://YOUR-WECHAT-SHOP-LINK" target="_blank" rel="noopener"
+                        class="pixel-card p-3 text-center hover:bg-white text-inherit no-underline group">
+                        <div class="w-10 h-10 mx-auto flex items-center justify-center border-2 border-primary bg-white mb-2">
+                            <svg class="w-5 h-5" viewBox="0 0 24 24" aria-hidden="true" fill="#07C160">
+                                <path d="M7 4h10a2 2 0 0 1 2 2v1H5V6a2 2 0 0 1 2-2zm-2 5h14l-1.2 9.6a2 2 0 0 1-2 1.4H8.2a2 2 0 0 1-2-1.4L5 9zm4 3v4m6-4v4" />
+                            </svg>
+                        </div>
+                        <div class="text-sm font-bold">微信小商店</div>
+                    </a>
+                    <a href="#" class="pixel-card p-3 text-center text-inherit no-underline group coming-soon"
+                        aria-disabled="true">
+                        <div class="w-10 h-10 mx-auto flex items-center justify-center border-2 border-primary bg-white mb-2">
+                            <svg class="w-5 h-5" viewBox="0 0 24 24" aria-hidden="true" fill="#543D71">
+                                <path
+                                    d="M12 3a7 7 0 0 0-7 7v7a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3v-7a7 7 0 0 0-7-7zm0 2a5 5 0 0 1 5 5v7a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1v-7a5 5 0 0 1 5-5zm0 3a1 1 0 0 0-1 1v3.5l-1.2-1.2a1 1 0 1 0-1.4 1.4l2.9 2.9a1 1 0 0 0 1.4 0l2.9-2.9a1 1 0 1 0-1.4-1.4L13 12.5V9a1 1 0 0 0-1-1z" />
+                            </svg>
+                        </div>
+                        <div class="text-sm font-bold">知识星球（待开放）</div>
+                    </a>
+                    <a href="https://x.com/shuzikuangtu" target="_blank" rel="noopener"
+                        class="pixel-card p-3 text-center hover:bg-white text-inherit no-underline group">
+                        <div class="w-10 h-10 mx-auto flex items-center justify-center border-2 border-primary bg-white mb-2">
+                            <svg class="w-5 h-5" viewBox="0 0 24 24" aria-hidden="true" fill="#111111">
+                                <path
+                                    d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z" />
+                            </svg>
+                        </div>
+                        <div class="text-sm font-bold">X / Twitter</div>
+                    </a>
                 </div>
             </div>
-
-            <form class="space-y-4 max-w-md mx-auto" action="https://figurich.substack.com/subscribe" method="post"
-                target="_blank">
-                <div class="relative">
-                    <!-- 邮件图标 SVG -->
-                    <svg class="w-6 h-6 absolute left-3 top-3 text-gray-400" fill="none" stroke="currentColor"
-                        viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
-                        </path>
-                    </svg>
-
-                    <input type="email" name="email"
-                        class="zh-text w-full p-3 pl-10 border-2 border-primary bg-background font-mono focus:outline-none focus:shadow-[4px_4px_0px_0px_#543D71] transition-shadow"
-                        placeholder="请输入您的邮箱地址...">
-                    <input type="email" name="email"
-                        class="en-text w-full p-3 pl-10 border-2 border-primary bg-background font-mono focus:outline-none focus:shadow-[4px_4px_0px_0px_#543D71] transition-shadow"
-                        placeholder="Email Address...">
+            <div class="pixel-card p-6 en-text">
+                <div class="font-bold mb-4">Platforms</div>
+                <div class="grid grid-cols-3 gap-3">
+                    <a href="https://figurich.substack.com/" target="_blank" rel="noopener"
+                        class="pixel-card p-3 text-center hover:bg-white text-inherit no-underline group">
+                        <div class="w-10 h-10 mx-auto flex items-center justify-center border-2 border-primary bg-white mb-2">
+                            <svg class="w-5 h-5" viewBox="0 0 24 24" aria-hidden="true" fill="#FF6719">
+                                <path
+                                    d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z" />
+                            </svg>
+                        </div>
+                        <div class="text-sm font-bold">Substack</div>
+                    </a>
+                    <a href="https://YOUR-GUMROAD-PROFILE-LINK" target="_blank" rel="noopener"
+                        class="pixel-card p-3 text-center hover:bg-white text-inherit no-underline group">
+                        <div class="w-10 h-10 mx-auto flex items-center justify-center border-2 border-primary bg-white mb-2">
+                            <svg class="w-5 h-5" viewBox="0 0 24 24" aria-hidden="true" fill="#FF90E8">
+                                <path
+                                    d="M21.6 7.2c-1.2-2.8-4-4.7-7.2-4.7H9.6C5.4 2.5 2 5.9 2 10.1v3.8c0 4.2 3.4 7.6 7.6 7.6h4.8c4.2 0 7.6-3.4 7.6-7.6V10c0-1-.2-1.9-.4-2.8zM10 9.5h4.2c.7 0 1.3.6 1.3 1.3s-.6 1.3-1.3 1.3H10c-.7 0-1.3-.6-1.3-1.3s.6-1.3 1.3-1.3z" />
+                            </svg>
+                        </div>
+                        <div class="text-sm font-bold">Gumroad</div>
+                    </a>
+                    <a href="#" class="pixel-card p-3 text-center text-inherit no-underline group coming-soon"
+                        aria-disabled="true">
+                        <div class="w-10 h-10 mx-auto flex items-center justify-center border-2 border-primary bg-white mb-2">
+                            <svg class="w-5 h-5" viewBox="0 0 24 24" aria-hidden="true" fill="#229ED9">
+                                <path
+                                    d="M22.5 3.5 2.9 11.2c-1.3.5-1.3 1.2-.2 1.6l5 1.6 1.9 5.8c.2.6.4.8 1 .8.4 0 .6-.2.9-.4l2.8-2.7 5.8 4.2c1.1.6 1.8.3 2.1-1l3.8-17.7c.3-1.4-.5-2-1.5-1.6zM9.2 14.6l9.9-6.2c.5-.3.9.1.5.4l-8.2 7.4-.3 3.6-1.7-5.1-3.7-1.2 3.5-2.2z" />
+                            </svg>
+                        </div>
+                        <div class="text-sm font-bold">Telegram (Soon)</div>
+                    </a>
                 </div>
-                <button type="submit" class="pixel-btn w-full justify-center text-lg">
-                    <span class="zh-text">领取行动清单</span>
-                    <span class="en-text">GET THE ACTION LIST</span>
-                </button>
-                <p class="font-mono text-xs text-gray-500 mt-4">
-                    <span class="zh-text">承诺：只发可执行的内容，随时一键退订</span>
-                    <span class="en-text">Promise: Only actionable content, easy unsubscribe</span>
-                </p>
-            </form>
-
-            <div class="mt-8 pt-6 border-t border-primary/20">
-                <a href="#"
-                    class="text-primary hover:bg-primary hover:text-white px-2 py-1 transition-colors font-bold text-sm">
-                    <span class="zh-text">[ 或：预约 1 对 1 专注规划 ]</span>
-                    <span class="en-text">[ Or: Book a 1:1 focus session ]</span>
-                </a>
             </div>
         </div>
     </section>
