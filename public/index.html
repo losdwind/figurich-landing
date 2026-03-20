@@ -1,1216 +1,242 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>数字狂徒 Figurich | 反算法实验室</title>
-    <meta name="description" content="每周专注包：数字排毒步骤、AI 提示词、实用工具推荐。适合独立创业者、斜杠上班族、学生与早期职场人。">
-    <meta name="description" lang="en"
-        content="Weekly focus kit with detox steps, AI prompts, and practical tools for solo founders, side-hustlers, and early-career builders.">
-    <meta property="og:title" content="Figurich | Focus Kit for Builders">
-    <meta property="og:description"
-        content="Weekly focus kit: detox steps, AI prompts, and practical tools to turn attention into output.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://YOUR-DOMAIN">
-    <meta property="og:image" content="https://YOUR-DOMAIN/logo.png">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Figurich | Focus Kit for Builders">
-    <meta name="twitter:description"
-        content="Weekly focus kit: detox steps, AI prompts, and practical tools to turn attention into output.">
-    <meta name="twitter:image" content="https://YOUR-DOMAIN/logo.png">
-    <link rel="icon" type="image/png" href="logo.png">
-    <link rel="apple-touch-icon" href="logo.png">
-
-    <!-- Vercel Web Analytics -->
-    <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
-
-    <!-- 引入字体 -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Preload Jersey 20 font for faster rendering -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Jersey+20&display=swap">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Jersey+20&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Noto+Sans+SC:wght@400;500;700;900&display=swap"
-        rel="stylesheet">
-
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#543D71',
-                        'primary-dark': '#3E2D53',
-                        'primary-container': '#DCD0F0',
-                        surface: '#FFFFFF',
-                        background: '#F0EAFF',
-                        outline: '#2D2A33',
-                    },
-                    fontFamily: {
-                        sans: ['Noto Sans SC', 'sans-serif'],
-                        jersey: ['Jersey 20', 'sans-serif'],
-                        mono: ['Space Mono', 'monospace'],
-                    },
-                    boxShadow: {
-                        'pixel': '4px 4px 0px 0px #543D71',
-                        'pixel-hover': '2px 2px 0px 0px #543D71',
-                    },
-                }
-            }
-        }
-    </script>
-
-    <style>
-        /* 全局背景 */
-        body {
-            background-color: #F0EAFF;
-            background-image:
-                linear-gradient(rgba(84, 61, 113, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(84, 61, 113, 0.05) 1px, transparent 1px);
-            background-size: 20px 20px;
-            color: #2D2A33;
-            transition: all 0.3s ease;
-        }
-
-        /* --- 严格的语言显示逻辑 --- */
-        .zh-text,
-        .en-text {
-            display: none !important;
-        }
-
-        /* 中文模式 */
-        body.mode-zh .zh-text {
-            display: block !important;
-        }
-
-        body.mode-zh span.zh-text {
-            display: inline !important;
-        }
-
-        body.mode-zh .zh-flex {
-            display: flex !important;
-        }
-
-        body.mode-zh .en-text,
-        body.mode-zh .en-flex {
-            display: none !important;
-        }
-
-        /* 英文模式 */
-        body.mode-en .en-text {
-            display: block !important;
-        }
-
-        body.mode-en span.en-text {
-            display: inline !important;
-        }
-
-        body.mode-en .en-flex {
-            display: flex !important;
-        }
-
-        body.mode-en .zh-text,
-        body.mode-en .zh-flex {
-            display: none !important;
-        }
-
-        /* --- 字体逻辑 --- */
-        /* 中文模式：Noto Sans SC Black (超粗) */
-        body.mode-zh {
-            font-family: 'Noto Sans SC', sans-serif;
-        }
-
-        body.mode-zh .display-font {
-            font-family: 'Noto Sans SC', sans-serif;
-            font-weight: 900;
-            letter-spacing: -0.05em;
-        }
-
-        body.mode-zh .brand-name {
-            font-family: 'Noto Sans SC', sans-serif;
-            font-weight: 900;
-            letter-spacing: -0.02em;
-        }
-
-        /* 英文模式：Jersey 20 */
-        body.mode-en {
-            font-family: 'Space Mono', monospace;
-        }
-
-        body.mode-en .display-font {
-            font-family: 'Jersey 20', sans-serif;
-            letter-spacing: normal;
-        }
-
-        body.mode-en .brand-name {
-            font-family: 'Jersey 20', sans-serif;
-            letter-spacing: 0.05em;
-        }
-
-        body.mode-en .nav-item {
-            letter-spacing: 0.12em;
-            font-size: 0.9em;
-        }
-
-        /* --- 组件样式 --- */
-        .section {
-            padding: 80px 24px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .pixel-card {
-            background: #FFFFFF;
-            border: 2px solid #543D71;
-            box-shadow: none;
-            transition: all 0.2s steps(2);
-        }
-
-        .pixel-card:hover {
-            transform: translate(1px, 1px);
-            box-shadow: 1px 1px 0px 0px rgba(84, 61, 113, 0.35);
-        }
-
-        .pixel-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 12px 24px;
-            background: #543D71;
-            color: #FFFFFF;
-            border: 2px solid #543D71;
-            font-size: 16px;
-            text-transform: uppercase;
-            box-shadow: none;
-            transition: all 0.1s linear;
-            cursor: pointer;
-            text-decoration: none;
-        }
-
-        .pixel-btn:hover {
-            background: #6a4d8f;
-            transform: translate(1px, 1px);
-            box-shadow: 1px 1px 0px 0px rgba(0, 0, 0, 0.15);
-        }
-
-        .pixel-btn:active {
-            transform: translate(2px, 2px);
-            box-shadow: none;
-        }
-
-        .pixel-btn-outline {
-            background: transparent;
-            color: #543D71;
-            box-shadow: 4px 4px 0px 0px #543D71;
-        }
-
-        .pixel-btn-outline:hover {
-            background: #DCD0F0;
-        }
-
-        .separator-line {
-            height: 2px;
-            background: #543D71;
-            position: relative;
-            margin: 40px 0;
-        }
-
-        .separator-line::after,
-        .separator-line::before {
-            content: '';
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background: #543D71;
-            top: -4px;
-        }
-
-        .separator-line::after {
-            right: 0;
-        }
-
-        .separator-line::before {
-            left: 0;
-        }
-
-        .accordion-item {
-            border-bottom: 2px solid #E5E5E5;
-        }
-
-        .accordion-header {
-            width: 100%;
-            padding: 20px;
-            text-align: left;
-            background: none;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 18px;
-            transition: background 0.2s;
-        }
-
-        .accordion-header:hover {
-            background: #F3F0F7;
-        }
-
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s cubic-bezier(0, 1, 0, 1);
-            padding: 0 20px;
-            background: #F9F8FC;
-            border-left: 4px solid #543D71;
-        }
-
-        .accordion-content.active {
-            max-height: 500px;
-            padding-bottom: 20px;
-            padding-top: 10px;
-            border-bottom: 2px solid #543D71;
-        }
-
-        .tech-tag {
-            background: #DCD0F0;
-            border: 1px solid #543D71;
-            padding: 2px 8px;
-            font-size: 12px;
-            color: #543D71;
-            font-weight: bold;
-        }
-
-        .price-tag {
-            font-size: 14px;
-            padding: 4px 10px;
-        }
-
-        .lang-toggle {
-            cursor: pointer;
-            border: 2px solid #543D71;
-            padding: 4px 8px;
-            font-weight: bold;
-            font-size: 14px;
-            background: white;
-            transition: all 0.2s;
-        }
-
-        .lang-toggle:hover {
-            background: #DCD0F0;
-        }
-
-        .lang-toggle span.active {
-            background: #543D71;
-            color: white;
-            padding: 0 4px;
-        }
-
-        .count-up {
-            display: inline-block;
-            min-width: 1ch;
-        }
-
-        .coming-soon {
-            opacity: 0.6;
-            cursor: not-allowed;
-            pointer-events: none;
-        }
-
-        /* 隐藏输入框的默认样式 */
-        input:focus {
-            outline: none;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>数字狂徒 Figurich | AI 个人健康产品站</title>
+  <meta name="description" content="Figurich — AI for personal wellbeing. Focus & digital detox, smart-home health tracking, content creation, personal branding, and VIP companion support.">
+  <meta name="theme-color" content="#f8f4ff">
+  <link rel="canonical" href="https://figurich.com/">
+  <meta property="og:title" content="Figurich | AI for personal wellbeing">
+  <meta property="og:description" content="Focus & digital detox, smart-home health, content creation, personal branding, and VIP companion support — all powered by AI.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://figurich.com/">
+  <meta property="og:image" content="https://figurich.com/logo.png">
+  <meta property="og:locale" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Figurich | AI for personal wellbeing">
+  <meta name="twitter:description" content="Focus & digital detox, smart-home health, content creation, personal branding, and VIP companion support.">
+  <meta name="twitter:image" content="https://figurich.com/logo.png">
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="apple-touch-icon" href="logo.png">
+  <link rel="stylesheet" href="assets/site.css">
 </head>
-
-<body class="mode-zh">
-
-    <!-- 导航栏 -->
-    <nav
-        style="position: sticky; top: 0; background: rgba(240, 234, 255, 0.95); z-index: 100; backdrop-filter: blur(10px); border-bottom: 2px solid #543D71;">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="flex items-center gap-2">
-                <img src="logo.png" alt="Figurich Logo" class="w-10 h-10 object-contain" />
-                <!-- 品牌名 -->
-                <div class="text-2xl brand-name text-primary tracking-wide">
-                    <span class="zh-text">数字狂徒</span>
-                    <span class="en-text">FIGURICH</span>
-                    <span class="font-mono text-sm align-middle ml-1">
-                        <span class="zh-text">1.0版</span>
-                        <span class="en-text">v1.0</span>
-                    </span>
-                </div>
+<body class="mode-zh site-shell">
+  <header class="site-header">
+    <div class="container">
+      <div class="header-row">
+        <a class="brand" href="./" aria-label="Figurich home">
+          <img src="logo.png" alt="Figurich logo">
+          <div class="brand-copy">
+            <div class="brand-wordmark">
+              <span class="lang-inline" data-lang="zh">数字狂徒</span>
+              <span class="lang-inline" data-lang="en">FIGURICH</span>
             </div>
+          </div>
+        </a>
 
-            <div class="hidden md:flex gap-8 text-lg font-bold">
-                <a href="#about" class="nav-item text-primary hover:underline decoration-2 underline-offset-4">
-                    <span class="zh-text">常见困扰</span>
-                    <span class="en-text">STRUGGLES</span>
-                </a>
-                <a href="#roadmap" class="nav-item text-primary hover:underline decoration-2 underline-offset-4">
-                    <span class="zh-text">三步方案</span>
-                    <span class="en-text">3-STEP PLAN</span>
-                </a>
-                <a href="#gear" class="nav-item text-primary hover:underline decoration-2 underline-offset-4">
-                    <span class="zh-text">你能拿到</span>
-                    <span class="en-text">WHAT YOU GET</span>
-                </a>
-                <a href="#access" class="nav-item text-primary hover:underline decoration-2 underline-offset-4">
-                    <span class="zh-text">入口</span>
-                    <span class="en-text">GET STARTED</span>
-                </a>
-            </div>
+        <nav class="desktop-nav" aria-label="Primary">
+          <a class="nav-link" href="./" data-route="/">
+            <span class="lang-inline" data-lang="zh">首页</span>
+            <span class="lang-inline" data-lang="en">Home</span>
+          </a>
+          <a class="nav-link" href="#products">
+            <span class="lang-inline" data-lang="zh">产品</span>
+            <span class="lang-inline" data-lang="en">Products</span>
+          </a>
+          <a class="nav-link" href="openclaw-health/" data-route="/openclaw-health/">
+            <span class="lang-inline" data-lang="zh">OpenClaw 健康</span>
+            <span class="lang-inline" data-lang="en">OpenClaw Health</span>
+          </a>
+        </nav>
 
-            <div class="flex items-center gap-4">
-                <button class="lang-toggle" onclick="toggleLanguage()">
-                    <span class="zh-text"><span class="active">中文</span> / EN</span>
-                    <span class="en-text">CN / <span class="active">EN</span></span>
-                </button>
-                <a href="#access" class="pixel-btn hidden sm:inline-flex" style="padding: 6px 16px; font-size: 14px;">
-                    <span class="zh-text">领取每周专注包</span>
-                    <span class="en-text">GET WEEKLY FOCUS KIT</span>
-                </a>
-                <button id="mobile-menu-btn"
-                    class="md:hidden p-2 border-2 border-primary text-primary flex items-center justify-center">
-                    <!-- 菜单图标 SVG -->
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                </button>
-            </div>
+        <div class="header-actions">
+          <button class="language-toggle" type="button" data-language-toggle aria-label="Toggle language">
+            <span class="lang-inline" data-lang="zh">中文 / EN</span>
+            <span class="lang-inline" data-lang="en">CN / EN</span>
+          </button>
+          <a class="button" href="openclaw-health/#booking">
+            <span class="lang-inline" data-lang="zh">预约沟通</span>
+            <span class="lang-inline" data-lang="en">Book intro call</span>
+          </a>
+          <button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-label="Open navigation">
+            <span aria-hidden="true">☰</span>
+          </button>
         </div>
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="md:hidden hidden border-b-2 border-primary bg-background p-4">
-            <div class="flex flex-col gap-4">
-                <a href="#about" class="nav-item block text-primary font-bold">
-                    <span class="zh-text">常见困扰</span><span class="en-text">STRUGGLES</span>
-                </a>
-                <a href="#roadmap" class="nav-item block text-primary font-bold">
-                    <span class="zh-text">三步方案</span><span class="en-text">3-STEP PLAN</span>
-                </a>
-                <a href="#gear" class="nav-item block text-primary font-bold">
-                    <span class="zh-text">你能拿到</span><span class="en-text">WHAT YOU GET</span>
-                </a>
-                <a href="#access" class="nav-item block text-primary font-bold">
-                    <span class="zh-text">入口</span><span class="en-text">GET STARTED</span>
-                </a>
-            </div>
-        </div>
-    </nav>
+      </div>
 
-    <!-- Hero Section -->
-    <section class="section text-center min-h-[85vh] flex flex-col justify-center items-center">
-        <div class="text-primary mb-4 text-sm tracking-widest uppercase font-bold">
-            <span class="zh-text">[ 适合：独立创业 / 斜杠上班族 / 在校生 ]</span>
-            <span class="en-text">[ FOR: SOLO FOUNDERS / SIDE-HUSTLERS / STUDENTS ]</span>
+      <nav class="mobile-menu" data-mobile-menu aria-label="Mobile">
+        <div class="mobile-menu-panel stack">
+          <a class="nav-link" href="./" data-route="/" data-nav-close>
+            <span class="lang-inline" data-lang="zh">首页</span>
+            <span class="lang-inline" data-lang="en">Home</span>
+          </a>
+          <a class="nav-link" href="#products" data-nav-close>
+            <span class="lang-inline" data-lang="zh">产品</span>
+            <span class="lang-inline" data-lang="en">Products</span>
+          </a>
+          <a class="nav-link" href="openclaw-health/" data-route="/openclaw-health/" data-nav-close>
+            <span class="lang-inline" data-lang="zh">OpenClaw 健康</span>
+            <span class="lang-inline" data-lang="en">OpenClaw Health</span>
+          </a>
+          <a class="button" href="openclaw-health/#booking" data-nav-close>
+            <span class="lang-inline" data-lang="zh">预约沟通</span>
+            <span class="lang-inline" data-lang="en">Book intro call</span>
+          </a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="poster-hero">
+      <div class="container">
+        <div class="poster-kicker">
+          <span class="lang-inline" data-lang="zh">数字狂徒 | AI for wellbeing</span>
+          <span class="lang-inline" data-lang="en">Figurich | AI for wellbeing</span>
         </div>
 
-        <h1 class="text-6xl md:text-8xl text-primary mb-6 display-font leading-none">
-            <span class="zh-text">把注意力<br>留给重要的事</span>
-            <span class="en-text">FOCUS ON<br>WHAT MATTERS</span>
+        <h1 class="poster-title display">
+          <span class="lang-block" data-lang="zh">AI 为个人健康，不为分心和焦虑。</span>
+          <span class="lang-block" data-lang="en">AI for wellbeing, not for distraction and anxiety.</span>
         </h1>
 
-        <h2 class="text-3xl md:text-5xl text-primary mb-8 leading-tight font-bold">
-            <span class="zh-text">不讲术语，直接给你可执行的下一步</span>
-            <span class="en-text">No jargon. Just the next step you can do.</span>
-        </h2>
-
-        <div class="pixel-card p-6 max-w-2xl mx-auto mb-10 text-left bg-white relative">
-            <div
-                class="absolute -top-3 -left-3 bg-primary text-white px-2 py-1 text-xs border border-primary font-bold">
-                <span class="zh-text">当前任务</span>
-                <span class="en-text">MISSION_OBJ</span>
-            </div>
-
-            <div class="zh-text text-lg leading-relaxed text-gray-800">
-                <strong class="text-primary">数字狂徒</strong> 做的事：<br>
-                给你一套数字排毒方法，把注意力从噪音里拉回来；<br>
-                再用 AI 做小助理，把你的优势变成可持续的作品；<br>
-                按步骤跟着清单做，设置就能顺利完成。
-            </div>
-
-            <div class="en-text text-lg leading-relaxed text-gray-800">
-                What <strong class="text-primary">Figurich</strong> does:<br>
-                A clear detox system to pull your attention back from noise;<br>
-                AI as a helper to turn strengths into steady output;<br>
-                Every step is practical—no “learn a lot first” required.
-            </div>
-        </div>
-
-        <div
-            class="w-full max-w-md mx-auto mb-12 text-sm text-left border-l-2 border-primary pl-4 py-2 bg-primary/5 font-mono">
-            <div class="flex items-center gap-2 mb-2 text-primary">
-                <!-- 终端图标 SVG -->
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                </svg>
-                <span class="font-bold zh-text">实时日志:</span>
-                <span class="font-bold en-text">LIVE_LOG:</span>
-            </div>
-            <div class="space-y-1 opacity-80 zh-text">
-                <p>> [进行中] 数字排毒手册...发放中</p>
-                <p>> [完成] 新手 30 分钟数字排毒...<span class="count-up" data-target="2">0</span> 人打卡</p>
-                <p>> [完成] 1 对 1 定向规划...<span class="count-up" data-target="2">0</span> 场结束</p>
-                <p class="animate-pulse">> 你的下一步？_</p>
-            </div>
-            <div class="space-y-1 opacity-80 en-text">
-                <p>> [IN PROGRESS] Digital Detox Playbook...Sending</p>
-                <p>> [OK] 30-min Digital Detox...<span class="count-up" data-target="2">0</span> check-ins</p>
-                <p>> [OK] 1:1 Focus Plan...<span class="count-up" data-target="2">0</span> sessions done</p>
-                <p class="animate-pulse">> Your next move?_</p>
-            </div>
-        </div>
-
-        <div class="flex flex-col sm:flex-row gap-6 justify-center">
-            <a href="#access" class="pixel-btn text-lg">
-                <span class="zh-text">领取专注包</span>
-                <span class="en-text">GET THE FOCUS KIT</span>
-            </a>
-            <a href="#access" class="pixel-btn pixel-btn-outline text-lg">
-                <span class="zh-text">看看有什么</span>
-                <span class="en-text">SEE WHAT'S INSIDE</span>
-            </a>
-        </div>
-        <div class="mt-4 text-xs text-primary/70 font-bold">
-            <span class="zh-text">每周 1 封：数字排毒步骤 + AI 提示词 + 工具推荐</span>
-            <span class="en-text">One email a week: detox step, AI prompt, tool pick</span>
-        </div>
-    </section>
-
-    <!-- 痛点 Section -->
-    <section id="about" class="section">
-        <div class="separator-line"></div>
-        <h2 class="text-4xl text-center mb-2 font-bold display-font">
-            <span class="zh-text">常见困扰：不是你不够努力</span>
-            <span class="en-text">Common Struggles: It's not a willpower problem</span>
-        </h2>
-        <p class="text-center text-primary/60 mb-12 text-sm font-bold">
-            <span class="zh-text">信息太多、时间太碎、方向太乱——靠堆课程解决不了</span>
-            <span class="en-text">Too much input, not enough clarity—buying more courses won’t solve it.</span>
+        <p class="poster-copy lang-block" data-lang="zh">
+          我做这些产品，是因为现在很多 AI 工具其实在放大分心和焦虑。我更想做另一种东西: 用 AI 帮人把注意力、习惯、作息、输出和陪伴，慢慢接回真实生活。
+        </p>
+        <p class="poster-copy lang-block" data-lang="en">
+          I build these products because too much AI amplifies distraction and anxiety. I want a different kind of tool: AI that helps reconnect attention, habits, daily rhythm, output, and support with real life.
         </p>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <!-- Card 1 -->
-            <div class="pixel-card p-6 group">
-                <div class="flex justify-between items-start mb-4">
-                    <!-- SVG 图标 (英文模式显示) -->
-                    <div class="en-text">
-                        <svg class="w-10 h-10 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                    </div>
-
-                    <span class="tech-tag zh-text">状态：超时</span>
-                    <span class="tech-tag en-text">TIMEOUT</span>
-                </div>
-                <h3 class="text-xl font-bold mb-2">
-                    <span class="zh-text">刷手机停不下来</span>
-                    <span class="en-text">Phone scroll trap</span>
-                </h3>
-                <p class="text-gray-600">
-                    <span class="zh-text">想查一条信息，结果滑了半小时短视频。不是自控力差，而是环境在消耗你。</span>
-                    <span class="en-text">Open phone for one thing, lose 30 minutes. It’s not you; the environment is
-                        rigged to distract.</span>
-                </p>
-            </div>
-
-            <!-- Card 2 -->
-            <div class="pixel-card p-6 group">
-                <div class="flex justify-between items-start mb-4">
-                    <div class="en-text">
-                        <svg class="w-10 h-10 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4">
-                            </path>
-                        </svg>
-                    </div>
-
-                    <span class="tech-tag zh-text">状态：存储已满</span>
-                    <span class="tech-tag en-text">STORAGE_FULL</span>
-                </div>
-                <h3 class="text-xl font-bold mb-2">
-                    <span class="zh-text">收藏一堆，却没动手</span>
-                    <span class="en-text">Saved links, zero action</span>
-                </h3>
-                <p class="text-gray-600">
-                    <span class="zh-text">课程、PDF、收藏夹都在涨，但作品产出没有涨。你需要的是清单和节奏，而不是更多资料。</span>
-                    <span class="en-text">More courses and PDFs, but no output. You need a checklist and rhythm, not
-                        more bookmarks.</span>
-                </p>
-            </div>
-
-            <!-- Card 3 -->
-            <div class="pixel-card p-6 group">
-                <div class="flex justify-between items-start mb-4">
-                    <div class="en-text">
-                        <svg class="w-10 h-10 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
-                            </path>
-                        </svg>
-                    </div>
-
-                    <span class="tech-tag zh-text">状态：系统过载</span>
-                    <span class="tech-tag en-text">OVERLOAD</span>
-                </div>
-                <h3 class="text-xl font-bold mb-2">
-                    <span class="zh-text">AI 新东西太多</span>
-                    <span class="en-text">Too many AI updates</span>
-                </h3>
-                <p class="text-gray-600">
-                    <span class="zh-text">工具、提示词、最新版本满天飞，但真正能帮你省时间、赚到钱的那几个没有筛出来。</span>
-                    <span class="en-text">New tools and prompts every day, but the few that actually save time or make
-                        money are hard to spot.</span>
-                </p>
-            </div>
-
-            <!-- Card 4 -->
-            <div class="pixel-card p-6 group">
-                <div class="flex justify-between items-start mb-4">
-                    <div class="en-text">
-                        <svg class="w-10 h-10 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                        </svg>
-                    </div>
-
-                    <span class="tech-tag zh-text">状态：电量不足</span>
-                    <span class="tech-tag en-text">LOW_BATTERY</span>
-                </div>
-                <h3 class="text-xl font-bold mb-2">
-                    <span class="zh-text">一个人容易掉线</span>
-                    <span class="en-text">Hard to stay on track alone</span>
-                </h3>
-                <p class="text-gray-600">
-                    <span class="zh-text">没人提醒、没人共创，容易被琐事拉走。你需要外力帮你保持节奏，而不是鸡汤。</span>
-                    <span class="en-text">No reminders or partners, so chores win. You need gentle outside support, not
-                        more motivation quotes.</span>
-                </p>
-            </div>
-        </div>
+      </div>
     </section>
 
-    <!-- 方法论 Section -->
-    <section id="roadmap" class="section">
-        <h2 class="text-4xl text-center mb-12 font-bold display-font">
-            <span class="zh-text">三步让注意力回正</span>
-            <span class="en-text">Three steps to get your focus back</span>
-        </h2>
-
-        <div class="space-y-6 relative">
-            <div class="hidden md:block absolute left-[50%] top-0 bottom-0 w-0.5 bg-primary -translate-x-1/2 z-0"></div>
-
-            <!-- Step 1 -->
-            <div class="relative z-10 flex flex-col md:flex-row items-center gap-6">
-                <div class="md:w-1/2 flex md:justify-end">
-                    <div class="pixel-card p-6 w-full md:max-w-sm bg-white">
-                        <div class="flex items-center gap-3 mb-3 border-b border-primary/20 pb-2">
-                            <span class="text-3xl brand-name text-primary">01</span>
-                            <h3 class="font-bold text-xl">
-                                <span class="zh-text">先清理</span>
-                                <span class="en-text">Clean the noise</span>
-                            </h3>
-                        </div>
-                        <p class="text-sm">
-                            <span class="zh-text">一张清单关掉 90% 的通知和杂音，腾出连续的 30 分钟。第一天就能完成。</span>
-                            <span class="en-text">Use one checklist to shut down 90% of notifications and noise so you
-                                get 30 solid minutes. You can do this on day one.</span>
-                        </p>
-                    </div>
-                </div>
-                <div
-                    class="w-8 h-8 bg-primary border-4 border-white outline outline-2 outline-primary rounded-none rotate-45 flex-shrink-0">
-                </div>
-                <div class="md:w-1/2 pl-4 md:pl-0">
-                    <div class="text-xs text-primary/60 font-bold">
-                        <span class="zh-text">状态：初始化中...</span>
-                        <span class="en-text">STATUS: INITIALIZING...</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Step 2 -->
-            <div class="relative z-10 flex flex-col md:flex-row-reverse items-center gap-6">
-                <div class="md:w-1/2 flex md:justify-start">
-                    <div class="pixel-card p-6 w-full md:max-w-sm bg-white">
-                        <div class="flex items-center gap-3 mb-3 border-b border-primary/20 pb-2">
-                            <span class="text-3xl brand-name text-primary">02</span>
-                            <h3 class="font-bold text-xl">
-                                <span class="zh-text">再定方向</span>
-                                <span class="en-text">Pick a direction</span>
-                            </h3>
-                        </div>
-                        <p class="text-sm">
-                            <span class="zh-text">用简单问答把"我擅长什么、想服务谁"写成一句话，明确接下来 4 周的输出主题。</span>
-                            <span class="en-text">Answer a few prompts to decide “what I’m good at” and “who I serve,”
-                                then lock a 4-week content theme.</span>
-                        </p>
-                    </div>
-                </div>
-                <div class="w-8 h-8 bg-white border-4 border-primary rounded-none rotate-45 flex-shrink-0"></div>
-                <div class="md:w-1/2 pr-4 md:pr-0 md:text-right">
-                    <div class="text-xs text-primary/60 font-bold">
-                        <span class="zh-text">状态：等待中...</span>
-                        <span class="en-text">STATUS: PENDING...</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Step 3 -->
-            <div class="relative z-10 flex flex-col md:flex-row items-center gap-6">
-                <div class="md:w-1/2 flex md:justify-end">
-                    <div class="pixel-card p-6 w-full md:max-w-sm bg-white">
-                        <div class="flex items-center gap-3 mb-3 border-b border-primary/20 pb-2">
-                            <span class="text-3xl brand-name text-primary">03</span>
-                            <h3 class="font-bold text-xl">
-                                <span class="zh-text">最后用 AI 帮忙</span>
-                                <span class="en-text">Let AI assist</span>
-                            </h3>
-                        </div>
-                        <p class="text-sm">
-                            <span class="zh-text">提供现成模板：回复邮件、整理资料、生成文案，AI 做基础体力，你负责决定和微调。</span>
-                            <span class="en-text">Plug in ready templates for replies, research tidy-up, and drafts. AI
-                                handles busywork; you make decisions and edits.</span>
-                        </p>
-                    </div>
-                </div>
-                <div class="w-8 h-8 bg-white border-4 border-primary rounded-none rotate-45 flex-shrink-0"></div>
-                <div class="md:w-1/2 pl-4 md:pl-0">
-                    <div class="text-xs text-primary/60 font-bold">
-                        <span class="zh-text">状态：锁定</span>
-                        <span class="en-text">STATUS: LOCKED</span>
-                    </div>
-                </div>
-            </div>
+    <section class="product-index" id="products">
+      <div class="container">
+        <div class="section-kicker">
+          <span class="lang-inline" data-lang="zh">5 个你现在就能用的工具包</span>
+          <span class="lang-inline" data-lang="en">5 kits you can get today</span>
         </div>
-    </section>
 
-    <!-- 装备 Section -->
-    <section id="gear" class="section">
-        <div class="separator-line"></div>
-        <div class="flex items-center justify-center gap-4 mb-8">
-            <!-- 背包图标 SVG -->
-            <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10">
-                </path>
-            </svg>
-            <h2 class="text-4xl text-center font-bold display-font">
-                <span class="zh-text">你能拿到的东西</span>
-                <span class="en-text">What you get</span>
-            </h2>
-        </div>
-        <p class="text-center text-primary/60 mb-12 text-sm max-w-lg mx-auto font-bold">
-            <span class="zh-text">// 不是一堆课程，而是能直接照做的清单、模板、AI 提示词</span>
-            <span class="en-text">// Not another course pile—checklists, templates, and AI prompts you can run in ChatGPT, Claude, Gemini, or Notion</span>
-        </p>
+        <div class="product-rows">
+          <a class="product-row" href="focus-kit/">
+            <div>
+              <div class="product-row-label">
+                <span class="lang-inline" data-lang="zh">专注与数字排毒</span>
+                <span class="lang-inline" data-lang="en">Focus & digital detox</span>
+              </div>
+              <h2 class="product-row-title">
+                <span class="lang-block" data-lang="zh">专注与数字排毒工具包</span>
+                <span class="lang-block" data-lang="en">Focus & Digital Detox Kit</span>
+              </h2>
+            </div>
+            <p class="product-row-summary lang-block" data-lang="zh">从 digital detox、输入整理和日常重置开始，把注意力先慢慢拉回来。</p>
+            <p class="product-row-summary lang-block" data-lang="en">Start with digital detox, input cleanup, and a lighter daily reset to bring attention back first.</p>
+          </a>
 
-        <div class="pixel-card max-w-3xl mx-auto overflow-hidden">
-            <!-- Gear 1 -->
-            <div class="accordion-item">
-                <button class="accordion-header">
-                    <span class="flex items-center gap-3">
-                        <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
-                            </path>
-                        </svg>
-                        <strong class="zh-text">数字排毒手册</strong>
-                        <strong class="en-text">Digital Detox Playbook</strong>
-                    </span>
-                    <!-- 加号 SVG -->
-                    <svg class="w-5 h-5 icon-toggle" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                    </svg>
-                </button>
-                <div class="accordion-content">
-                    <p class="mb-2 text-sm font-bold text-primary">
-                        <span class="zh-text">效果：从设备、软件、信息源到日常节奏，一套把注意力“调回自己”的设置方案。</span>
-                        <span class="en-text">Result: A full setup—from devices and apps to routines and inputs—to get your focus back.</span>
-                    </p>
-                    <div class="tech-tag inline-block">
-                        <span class="zh-text">包含：设备/应用设置清单 + 日常节奏模板 + 工具与信息源推荐</span>
-                        <span class="en-text">Includes: device/app checklist + daily routine template + tools & info source picks</span>
-                    </div>
-                </div>
+          <a class="product-row" href="openclaw-health/">
+            <div>
+              <div class="product-row-label">
+                <span class="lang-inline" data-lang="zh">基于 OpenClaw / NanoClaw 的智能家居健康方案</span>
+                <span class="lang-inline" data-lang="en">Smart-home health · powered by OpenClaw / NanoClaw</span>
+              </div>
+              <h2 class="product-row-title display">
+                <span class="lang-block" data-lang="zh">OpenClaw 健康工具包</span>
+                <span class="lang-block" data-lang="en">OpenClaw Health Kit</span>
+              </h2>
             </div>
-
-            <!-- Gear 2 -->
-            <div class="accordion-item">
-                <button class="accordion-header">
-                    <span class="flex items-center gap-3">
-                        <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
-                            </path>
-                        </svg>
-                        <strong class="zh-text">AI 人生目标访谈官</strong>
-                        <strong class="en-text">AI Strengths Interviewer</strong>
-                    </span>
-                    <svg class="w-5 h-5 icon-toggle" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                    </svg>
-                </button>
-                <div class="accordion-content">
-                    <p class="mb-2 text-sm font-bold text-primary">
-                        <span class="zh-text">效果：把“我擅长什么、我该往哪走”从感觉变成文字，输出优势清单与下一步建议。</span>
-                        <span class="en-text">Result: Turn “what I’m good at” into clear words—strengths, direction, and next steps.</span>
-                    </p>
-                    <div class="tech-tag inline-block">
-                        <span class="zh-text">包含：访谈脚本 + 总结模板 + 建议生成提示词</span>
-                        <span class="en-text">Includes: interview script + summary template + recommendation prompts</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Gear 3 -->
-            <div class="accordion-item">
-                <button class="accordion-header">
-                    <span class="flex items-center gap-3">
-                        <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z">
-                            </path>
-                        </svg>
-                        <strong class="zh-text">个人品牌设计包</strong>
-                        <strong class="en-text">Personal Brand Kit</strong>
-                    </span>
-                    <svg class="w-5 h-5 icon-toggle" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                    </svg>
-                </button>
-                <div class="accordion-content">
-                    <p class="mb-2 text-sm font-bold text-primary">
-                        <span class="zh-text">效果：基于你的优势，生成定位、风格、栏目与落地页骨架，让你开始持续输出。</span>
-                        <span class="en-text">Result: Turn your strengths into positioning, voice, content pillars, and a landing page outline.</span>
-                    </p>
-                    <div class="tech-tag inline-block">
-                        <span class="zh-text">包含：定位句式 + 栏目模板 + Landing Page 结构 + 风格检查表</span>
-                        <span class="en-text">Includes: positioning lines + content pillars + landing page outline + style checklist</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Gear 4 -->
-            <div class="accordion-item">
-                <button class="accordion-header">
-                    <span class="flex items-center gap-3">
-                        <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
-                            </svg>
-                        <strong class="zh-text">内容自动化工具箱</strong>
-                        <strong class="en-text">Content Automation Toolkit</strong>
-                    </span>
-                    <svg class="w-5 h-5 icon-toggle" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                    </svg>
-                </button>
-                <div class="accordion-content">
-                    <p class="mb-2 text-sm font-bold text-primary">
-                        <span class="zh-text">效果：把内容创作拆成可复用流程：选题、草稿、润色、发布，一套自动跑起来。</span>
-                        <span class="en-text">Result: A reusable workflow for ideas → draft → polish → publish, with quality checks built in.</span>
-                    </p>
-                    <div class="tech-tag inline-block">
-                        <span class="zh-text">包含：提示词库 + 工作流模板 + 质量检查清单</span>
-                        <span class="en-text">Includes: prompt library + workflow templates + quality checklist</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Gear 5 -->
-            <div class="accordion-item">
-                <button class="accordion-header">
-                    <span class="flex items-center gap-3">
-                        <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
-                            </path>
-                        </svg>
-                        <strong class="zh-text">陪伴社群（Q&A）</strong>
-                        <strong class="en-text">Companion Group (Q&A)</strong>
-                        <span class="tech-tag zh-text">付费</span>
-                        <span class="tech-tag en-text">PAID</span>
-                    </span>
-                    <svg class="w-5 h-5 icon-toggle" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                    </svg>
-                </button>
-                <div class="accordion-content">
-                    <p class="mb-2 text-sm font-bold text-primary">
-                        <span class="zh-text">效果：每周 Q&A + 轻量打卡 + 反馈陪跑，遇到卡点有人帮你推一把。</span>
-                        <span class="en-text">Result: Weekly Q&A, check-ins, and feedback so you don’t fall off track.</span>
-                    </p>
-                    <div class="tech-tag inline-block">
-                        <span class="zh-text">状态：待开放（订阅后优先通知）</span>
-                        <span class="en-text">Status: Coming soon (subscribers get first access)</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Access Section -->
-    <section id="access" class="section">
-        <div class="separator-line"></div>
-        <h2 class="text-4xl text-center mb-8 font-bold display-font">
-            <span class="zh-text">选择你的入口</span>
-            <span class="en-text">Choose Your Entry</span>
-        </h2>
-        <div class="grid grid-cols-1 gap-6">
-            <div class="pixel-card p-6 zh-text">
-                <h3 class="text-xl font-bold mb-3">免费内容</h3>
-                <p class="text-sm text-gray-600 mb-4">免费内容不缩水：每周一封清晰可做的专注包，直接照着做。</p>
-                <div class="flex items-center gap-2 text-xs text-gray-500 font-bold mb-3">
-                    <span>平台：</span>
-                    <span class="inline-flex items-center gap-1">
-                        <span class="w-6 h-6 flex items-center justify-center border-2 border-primary bg-white">
-                            <svg class="w-4 h-4" viewBox="0 0 24 24" aria-hidden="true" fill="#07C160">
-                                <path
-                                    d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 0 1 .213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 0 0 .167-.054l1.903-1.114a.864.864 0 0 1 .717-.098 10.16 10.16 0 0 0 2.837.403c.276 0 .543-.027.811-.05-.857-2.578.157-4.972 1.932-6.446 1.703-1.415 3.882-1.98 5.853-1.838-.576-3.583-4.196-6.348-8.596-6.348z" />
-                            </svg>
-                        </span>
-                        <span>公众号</span>
-                    </span>
-                    <span class="tech-tag">免费</span>
-                </div>
-                <div class="flex flex-col gap-3">
-                    <a href="https://YOUR-WECHAT-OFFICIAL-ACCOUNT-LINK" target="_blank" rel="noopener"
-                        class="pixel-btn w-full justify-center text-sm">关注公众号</a>
-                </div>
-            </div>
-            <div class="pixel-card p-6 en-text">
-                <h3 class="text-xl font-bold mb-3">Newsletter</h3>
-                <p class="text-sm text-gray-600 mb-4">A simple focus kit each week—clear steps you can do right away.</p>
-                <div class="flex items-center gap-2 text-xs text-gray-500 font-bold mb-3">
-                    <span>Platform:</span>
-                    <span class="inline-flex items-center gap-1">
-                        <span class="w-6 h-6 flex items-center justify-center border-2 border-primary bg-white">
-                            <svg class="w-4 h-4" viewBox="0 0 24 24" aria-hidden="true" fill="#FF6719">
-                                <path
-                                    d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z" />
-                            </svg>
-                        </span>
-                        <span>Substack</span>
-                    </span>
-                    <span class="tech-tag">FREE</span>
-                </div>
-                <div class="flex flex-col gap-3">
-                    <a href="https://figurich.substack.com/" target="_blank" rel="noopener"
-                        class="pixel-btn w-full justify-center text-sm">Focus Kit Email</a>
-                </div>
-            </div>
-            <div class="pixel-card p-6 zh-text">
-                <h3 class="text-xl font-bold mb-3">一次性购买</h3>
-                <p class="text-sm text-gray-600 mb-4">把之前的“干货”系统整理成一套：分类、索引、可直接执行的版本，一次买断。</p>
-                <div class="flex items-center gap-2 text-xs text-gray-500 font-bold mb-3">
-                    <span>平台：</span>
-                    <span class="inline-flex items-center gap-1">
-                        <span class="w-6 h-6 flex items-center justify-center border-2 border-primary bg-white">
-                            <svg class="w-4 h-4" viewBox="0 0 24 24" aria-hidden="true" fill="#07C160">
-                                <path d="M7 4h10a2 2 0 0 1 2 2v1H5V6a2 2 0 0 1 2-2zm-2 5h14l-1.2 9.6a2 2 0 0 1-2 1.4H8.2a2 2 0 0 1-2-1.4L5 9zm4 3v4m6-4v4" />
-                            </svg>
-                        </span>
-                        <span>微信小商店</span>
-                    </span>
-                    <span class="tech-tag price-tag">¥249</span>
-                </div>
-                <div class="flex flex-col gap-3">
-                    <a href="https://YOUR-XIAOSHANGDIAN-BUNDLE-LINK" target="_blank" rel="noopener"
-                        class="pixel-btn w-full justify-center text-sm">微信小商店购买</a>
-                </div>
-            </div>
-            <div class="pixel-card p-6 en-text">
-                <h3 class="text-xl font-bold mb-3">Ultimate Tool Bundle & Setup Guide</h3>
-                <p class="text-sm text-gray-600 mb-4">A curated system of past gems: organized, indexed, and ready to use in one purchase.</p>
-                <div class="flex items-center gap-2 text-xs text-gray-500 font-bold mb-3">
-                    <span>Platform:</span>
-                    <span class="inline-flex items-center gap-1">
-                        <span class="w-6 h-6 flex items-center justify-center border-2 border-primary bg-white">
-                            <svg class="w-4 h-4" viewBox="0 0 24 24" aria-hidden="true" fill="#FF90E8">
-                                <path
-                                    d="M21.6 7.2c-1.2-2.8-4-4.7-7.2-4.7H9.6C5.4 2.5 2 5.9 2 10.1v3.8c0 4.2 3.4 7.6 7.6 7.6h4.8c4.2 0 7.6-3.4 7.6-7.6V10c0-1-.2-1.9-.4-2.8zM10 9.5h4.2c.7 0 1.3.6 1.3 1.3s-.6 1.3-1.3 1.3H10c-.7 0-1.3-.6-1.3-1.3s.6-1.3 1.3-1.3z" />
-                            </svg>
-                        </span>
-                        <span>Gumroad</span>
-                    </span>
-                    <span class="tech-tag price-tag">$49</span>
-                </div>
-                <div class="flex flex-col gap-3">
-                    <a href="https://YOUR-GUMROAD-BUNDLE-LINK" target="_blank" rel="noopener"
-                        class="pixel-btn w-full justify-center text-sm">Buy on Gumroad</a>
-                </div>
-            </div>
-            <div class="pixel-card p-6 zh-text">
-                <h3 class="text-xl font-bold mb-3">订阅 + 社群</h3>
-                <p class="text-sm text-gray-600 mb-4">实时反馈 + 陪伴式执行 + Q&A 答疑，保持节奏不掉线。</p>
-                <div class="flex items-center gap-2 text-xs text-gray-500 font-bold mb-3">
-                    <span>平台：</span>
-                    <span class="inline-flex items-center gap-1 coming-soon">
-                        <span class="w-6 h-6 flex items-center justify-center border-2 border-primary bg-white">
-                            <svg class="w-4 h-4" viewBox="0 0 24 24" aria-hidden="true" fill="#543D71">
-                                <path
-                                    d="M12 3a7 7 0 0 0-7 7v7a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3v-7a7 7 0 0 0-7-7zm0 2a5 5 0 0 1 5 5v7a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1v-7a5 5 0 0 1 5-5z" />
-                            </svg>
-                        </span>
-                        <span>知识星球（待开放）</span>
-                    </span>
-                    <span class="tech-tag price-tag">¥1099/月</span>
-                </div>
-                <div class="flex flex-col gap-3">
-                    <a href="#" class="pixel-btn w-full justify-center text-sm coming-soon" aria-disabled="true">
-                        进入知识星球（待开放）
-                    </a>
-                </div>
-            </div>
-            <div class="pixel-card p-6 en-text">
-                <h3 class="text-xl font-bold mb-3">VIP Group</h3>
-                <p class="text-sm text-gray-600 mb-4">1 month of real-time Q&A, A–Z guidance, daily check-ins, and companion support.</p>
-                <div class="flex items-center gap-2 text-xs text-gray-500 font-bold mb-3">
-                    <span>Platforms:</span>
-                    <span class="inline-flex items-center gap-1">
-                        <span class="w-6 h-6 flex items-center justify-center border-2 border-primary bg-white">
-                            <svg class="w-4 h-4" viewBox="0 0 24 24" aria-hidden="true" fill="#FF90E8">
-                                <path
-                                    d="M21.6 7.2c-1.2-2.8-4-4.7-7.2-4.7H9.6C5.4 2.5 2 5.9 2 10.1v3.8c0 4.2 3.4 7.6 7.6 7.6h4.8c4.2 0 7.6-3.4 7.6-7.6V10c0-1-.2-1.9-.4-2.8zM10 9.5h4.2c.7 0 1.3.6 1.3 1.3s-.6 1.3-1.3 1.3H10c-.7 0-1.3-.6-1.3-1.3s.6-1.3 1.3-1.3z" />
-                            </svg>
-                        </span>
-                        <span>Gumroad</span>
-                    </span>
-                    <span class="inline-flex items-center gap-1 coming-soon">
-                        <span class="w-6 h-6 flex items-center justify-center border-2 border-primary bg-white">
-                            <svg class="w-4 h-4" viewBox="0 0 24 24" aria-hidden="true" fill="#229ED9">
-                                <path
-                                    d="M22.5 3.5 2.9 11.2c-1.3.5-1.3 1.2-.2 1.6l5 1.6 1.9 5.8c.2.6.4.8 1 .8.4 0 .6-.2.9-.4l2.8-2.7 5.8 4.2c1.1.6 1.8.3 2.1-1l3.8-17.7c.3-1.4-.5-2-1.5-1.6z" />
-                            </svg>
-                        </span>
-                        <span>Telegram (Soon)</span>
-                    </span>
-                    <span class="tech-tag price-tag">$199/mo</span>
-                </div>
-                <div class="flex flex-col gap-3">
-                    <a href="https://YOUR-GUMROAD-SUBSCRIPTION-LINK" target="_blank" rel="noopener"
-                        class="pixel-btn w-full justify-center text-sm">Subscribe on Gumroad</a>
-                    <a href="#" class="pixel-btn pixel-btn-outline w-full justify-center text-sm coming-soon"
-                        aria-disabled="true">Telegram (Coming Soon)</a>
-                </div>
-            </div>
-        </div>
-        <div class="separator-line hidden"></div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto hidden">
-            <div class="pixel-card p-6 zh-text">
-                <div class="font-bold mb-4">平台入口</div>
-                <div class="grid grid-cols-3 gap-3">
-                    <a href="https://YOUR-WECHAT-OFFICIAL-ACCOUNT-LINK" target="_blank" rel="noopener"
-                        class="pixel-card p-3 text-center hover:bg-white text-inherit no-underline group">
-                        <div class="w-10 h-10 mx-auto flex items-center justify-center border-2 border-primary bg-white mb-2">
-                            <svg class="w-5 h-5" viewBox="0 0 24 24" aria-hidden="true" fill="#07C160">
-                                <path
-                                    d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 0 1 .213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 0 0 .167-.054l1.903-1.114a.864.864 0 0 1 .717-.098 10.16 10.16 0 0 0 2.837.403c.276 0 .543-.027.811-.05-.857-2.578.157-4.972 1.932-6.446 1.703-1.415 3.882-1.98 5.853-1.838-.576-3.583-4.196-6.348-8.596-6.348zM5.785 5.991c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178A1.17 1.17 0 0 1 4.623 7.17c0-.651.52-1.18 1.162-1.18zm5.813 0c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178 1.17 1.17 0 0 1-1.162-1.178c0-.651.520-1.18 1.162-1.18zm5.34 2.867c-1.797-.052-3.746.512-5.28 1.786-1.72 1.428-2.687 3.72-1.78 6.22.942 2.453 3.666 4.229 6.884 4.229.826 0 1.622-.12 2.361-.336a.722.722 0 0 1 .598.082l1.584.926a.272.272 0 0 0 .14.047c.134 0 .240-.111.24-.247 0-.06-.023-.12-.038-.177l-.327-1.233a.582.582 0 0 1-.023-.156.49.49 0 0 1 .201-.398C23.024 18.48 24 16.82 24 14.98c0-3.21-2.931-5.837-6.656-6.088V8.89c-.135-.01-.27-.027-.407-.03zm-2.53 3.274c.535 0 .969.44.969.982a.976.976 0 0 1-.969.983.976.976 0 0 1-.969-.983c0-.542.434-.982.97-.982zm4.844 0c.535 0 .969.44.969.982a.976.976 0 0 1-.969.983.976.976 0 0 1-.969-.983c0-.542.434-.982.969-.982z" />
-                            </svg>
-                        </div>
-                        <div class="text-sm font-bold">公众号</div>
-                    </a>
-                    <a href="https://YOUR-WECHAT-SHOP-LINK" target="_blank" rel="noopener"
-                        class="pixel-card p-3 text-center hover:bg-white text-inherit no-underline group">
-                        <div class="w-10 h-10 mx-auto flex items-center justify-center border-2 border-primary bg-white mb-2">
-                            <svg class="w-5 h-5" viewBox="0 0 24 24" aria-hidden="true" fill="#07C160">
-                                <path d="M7 4h10a2 2 0 0 1 2 2v1H5V6a2 2 0 0 1 2-2zm-2 5h14l-1.2 9.6a2 2 0 0 1-2 1.4H8.2a2 2 0 0 1-2-1.4L5 9zm4 3v4m6-4v4" />
-                            </svg>
-                        </div>
-                        <div class="text-sm font-bold">微信小商店</div>
-                    </a>
-                    <a href="#" class="pixel-card p-3 text-center text-inherit no-underline group coming-soon"
-                        aria-disabled="true">
-                        <div class="w-10 h-10 mx-auto flex items-center justify-center border-2 border-primary bg-white mb-2">
-                            <svg class="w-5 h-5" viewBox="0 0 24 24" aria-hidden="true" fill="#543D71">
-                                <path
-                                    d="M12 3a7 7 0 0 0-7 7v7a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3v-7a7 7 0 0 0-7-7zm0 2a5 5 0 0 1 5 5v7a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1v-7a5 5 0 0 1 5-5zm0 3a1 1 0 0 0-1 1v3.5l-1.2-1.2a1 1 0 1 0-1.4 1.4l2.9 2.9a1 1 0 0 0 1.4 0l2.9-2.9a1 1 0 1 0-1.4-1.4L13 12.5V9a1 1 0 0 0-1-1z" />
-                            </svg>
-                        </div>
-                        <div class="text-sm font-bold">知识星球（待开放）</div>
-                    </a>
-                    <a href="https://x.com/shuzikuangtu" target="_blank" rel="noopener"
-                        class="pixel-card p-3 text-center hover:bg-white text-inherit no-underline group">
-                        <div class="w-10 h-10 mx-auto flex items-center justify-center border-2 border-primary bg-white mb-2">
-                            <svg class="w-5 h-5" viewBox="0 0 24 24" aria-hidden="true" fill="#111111">
-                                <path
-                                    d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z" />
-                            </svg>
-                        </div>
-                        <div class="text-sm font-bold">X / Twitter</div>
-                    </a>
-                </div>
-            </div>
-            <div class="pixel-card p-6 en-text">
-                <div class="font-bold mb-4">Platforms</div>
-                <div class="grid grid-cols-3 gap-3">
-                    <a href="https://figurich.substack.com/" target="_blank" rel="noopener"
-                        class="pixel-card p-3 text-center hover:bg-white text-inherit no-underline group">
-                        <div class="w-10 h-10 mx-auto flex items-center justify-center border-2 border-primary bg-white mb-2">
-                            <svg class="w-5 h-5" viewBox="0 0 24 24" aria-hidden="true" fill="#FF6719">
-                                <path
-                                    d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z" />
-                            </svg>
-                        </div>
-                        <div class="text-sm font-bold">Substack</div>
-                    </a>
-                    <a href="https://YOUR-GUMROAD-PROFILE-LINK" target="_blank" rel="noopener"
-                        class="pixel-card p-3 text-center hover:bg-white text-inherit no-underline group">
-                        <div class="w-10 h-10 mx-auto flex items-center justify-center border-2 border-primary bg-white mb-2">
-                            <svg class="w-5 h-5" viewBox="0 0 24 24" aria-hidden="true" fill="#FF90E8">
-                                <path
-                                    d="M21.6 7.2c-1.2-2.8-4-4.7-7.2-4.7H9.6C5.4 2.5 2 5.9 2 10.1v3.8c0 4.2 3.4 7.6 7.6 7.6h4.8c4.2 0 7.6-3.4 7.6-7.6V10c0-1-.2-1.9-.4-2.8zM10 9.5h4.2c.7 0 1.3.6 1.3 1.3s-.6 1.3-1.3 1.3H10c-.7 0-1.3-.6-1.3-1.3s.6-1.3 1.3-1.3z" />
-                            </svg>
-                        </div>
-                        <div class="text-sm font-bold">Gumroad</div>
-                    </a>
-                    <a href="#" class="pixel-card p-3 text-center text-inherit no-underline group coming-soon"
-                        aria-disabled="true">
-                        <div class="w-10 h-10 mx-auto flex items-center justify-center border-2 border-primary bg-white mb-2">
-                            <svg class="w-5 h-5" viewBox="0 0 24 24" aria-hidden="true" fill="#229ED9">
-                                <path
-                                    d="M22.5 3.5 2.9 11.2c-1.3.5-1.3 1.2-.2 1.6l5 1.6 1.9 5.8c.2.6.4.8 1 .8.4 0 .6-.2.9-.4l2.8-2.7 5.8 4.2c1.1.6 1.8.3 2.1-1l3.8-17.7c.3-1.4-.5-2-1.5-1.6zM9.2 14.6l9.9-6.2c.5-.3.9.1.5.4l-8.2 7.4-.3 3.6-1.7-5.1-3.7-1.2 3.5-2.2z" />
-                            </svg>
-                        </div>
-                        <div class="text-sm font-bold">Telegram (Soon)</div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-[#2D2A33] text-white py-12 border-t-4 border-primary mt-12">
-        <div class="max-w-4xl mx-auto px-6 text-center space-y-6">
-            <div class="flex items-center justify-center gap-2">
-                <span class="brand-name text-3xl">
-                    <span class="zh-text">数字狂徒</span>
-                    <span class="en-text">FIGURICH</span>
-                </span>
-                <span class="font-mono text-sm bg-primary px-1">2025</span>
-            </div>
-
-            <p class="text-lg text-gray-300 font-bold">
-                <span class="zh-text">"在算法的竞技场里，做个难以预测的人。"</span>
-                <span class="en-text">"In the algorithmic arena, be unpredictable."</span>
+            <p class="product-row-summary lang-block" data-lang="zh">
+              用 home camera、home speaker、skills 和 plugins，把提醒、记录和反馈放回每天真的会发生的场景里。
             </p>
+            <p class="product-row-summary lang-block" data-lang="en">
+              A system that uses home camera, home speaker, skills, and plugins to bring reminders, tracking, and feedback into everyday life.
+            </p>
+          </a>
 
-            <div class="flex justify-center gap-6 text-sm text-gray-500 font-bold">
-                <a href="#" class="hover:text-white hover:underline">
-                    <span class="zh-text">关于</span><span class="en-text">About</span>
-                </a>
-                <span>|</span>
-                <a href="#" class="hover:text-white hover:underline">
-                    <span class="zh-text">隐私</span><span class="en-text">Privacy</span>
-                </a>
-                <span>|</span>
-                <a href="#" class="hover:text-white hover:underline">
-                    <span class="zh-text">日志</span><span class="en-text">Logs</span>
-                </a>
+          <a class="product-row" href="content-creation-kit/">
+            <div>
+              <div class="product-row-label">
+                <span class="lang-inline" data-lang="zh">内容创作</span>
+                <span class="lang-inline" data-lang="en">Content creation</span>
+              </div>
+              <h2 class="product-row-title">
+                <span class="lang-block" data-lang="zh">内容创作工具包</span>
+                <span class="lang-block" data-lang="en">Content Creation Kit</span>
+              </h2>
             </div>
+            <p class="product-row-summary lang-block" data-lang="zh">把选题、草稿、润色和发布串成更稳定的流程，减少每次都从零开始的摩擦。</p>
+            <p class="product-row-summary lang-block" data-lang="en">Turn topic selection, drafting, polishing, and publishing into a steadier flow with less repeated friction.</p>
+          </a>
+
+          <a class="product-row" href="personal-branding/">
+            <div>
+              <div class="product-row-label">
+                <span class="lang-inline" data-lang="zh">个人品牌</span>
+                <span class="lang-inline" data-lang="en">Personal branding</span>
+              </div>
+              <h2 class="product-row-title">
+                <span class="lang-block" data-lang="zh">个人品牌工具包</span>
+                <span class="lang-block" data-lang="en">Personal Branding Kit</span>
+              </h2>
+            </div>
+            <p class="product-row-summary lang-block" data-lang="zh">把定位、表达、内容和自有用户连接起来，慢慢搭出真正属于自己的东西。</p>
+            <p class="product-row-summary lang-block" data-lang="en">Connect positioning, expression, content, and owned audience into something that actually feels like yours.</p>
+          </a>
+
+          <a class="product-row" href="vip-companion/">
+            <div>
+              <div class="product-row-label">
+                <span class="lang-inline" data-lang="zh">VIP 陪伴</span>
+                <span class="lang-inline" data-lang="en">VIP companion</span>
+              </div>
+              <h2 class="product-row-title">
+                <span class="lang-block" data-lang="zh">VIP 陪伴社群</span>
+                <span class="lang-block" data-lang="en">VIP Companion Group</span>
+              </h2>
+            </div>
+            <p class="product-row-summary lang-block" data-lang="zh">把反馈、答疑和陪跑放进同一个地方，让节奏更容易继续下去。</p>
+            <p class="product-row-summary lang-block" data-lang="en">Bring feedback, support, and accountability into one place so momentum is easier to keep.</p>
+          </a>
         </div>
-    </footer>
+      </div>
+    </section>
+  </main>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // 自动检测浏览器语言
-            const userLang = navigator.language || navigator.userLanguage;
-            if (userLang.startsWith('zh')) {
-                setLanguage('zh');
-            } else {
-                setLanguage('en');
-            }
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-row">
+        <div>
+          <div class="brand-wordmark">
+            <span class="lang-inline" data-lang="zh">数字狂徒</span>
+            <span class="lang-inline" data-lang="en">FIGURICH</span>
+          </div>
+        </div>
+        <div class="footer-links">
+          <a href="focus-kit/">
+            <span class="lang-inline" data-lang="zh">专注与数字排毒</span>
+            <span class="lang-inline" data-lang="en">Focus & Digital Detox</span>
+          </a>
+          <a href="openclaw-health/">
+            <span class="lang-inline" data-lang="zh">OpenClaw 健康</span>
+            <span class="lang-inline" data-lang="en">OpenClaw Health</span>
+          </a>
+          <a href="content-creation-kit/">
+            <span class="lang-inline" data-lang="zh">内容创作</span>
+            <span class="lang-inline" data-lang="en">Content Creation</span>
+          </a>
+          <a href="personal-branding/">
+            <span class="lang-inline" data-lang="zh">个人品牌</span>
+            <span class="lang-inline" data-lang="en">Personal Branding</span>
+          </a>
+          <a href="vip-companion/">
+            <span class="lang-inline" data-lang="zh">VIP 陪伴社群</span>
+            <span class="lang-inline" data-lang="en">VIP Companion Group</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
 
-            // Mobile Menu
-            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-            const mobileMenu = document.getElementById('mobile-menu');
-
-            // 简单的菜单切换逻辑
-            mobileMenuBtn.addEventListener('click', function () {
-                mobileMenu.classList.toggle('hidden');
-            });
-
-            // Accordion Logic
-            const headers = document.querySelectorAll('.accordion-header');
-            headers.forEach(header => {
-                header.addEventListener('click', () => {
-                    const content = header.nextElementSibling;
-                    const iconToggle = header.querySelector('.icon-toggle');
-
-                    document.querySelectorAll('.accordion-content').forEach(c => {
-                        if (c !== content && c.classList.contains('active')) {
-                            c.classList.remove('active');
-                            // 重置其他图标
-                            const otherIcon = c.previousElementSibling.querySelector('.icon-toggle');
-                            otherIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>'; // 加号
-                        }
-                    });
-
-                    content.classList.toggle('active');
-
-                    // 切换当前图标
-                    if (content.classList.contains('active')) {
-                        iconToggle.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path>'; // 减号
-                    } else {
-                        iconToggle.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>'; // 加号
-                    }
-                });
-            });
-
-            // Live log count-up animation
-            const counters = document.querySelectorAll('.count-up');
-            counters.forEach(counter => {
-                const target = parseInt(counter.getAttribute('data-target'), 10) || 0;
-                let current = 0;
-                const step = Math.max(1, Math.ceil(target / 20));
-                const tick = () => {
-                    current = Math.min(target, current + step);
-                    counter.textContent = String(current);
-                    if (current < target) {
-                        window.requestAnimationFrame(tick);
-                    }
-                };
-                window.requestAnimationFrame(tick);
-            });
-        });
-
-        // 切换语言函数
-        function toggleLanguage() {
-            const body = document.body;
-            if (body.classList.contains('mode-zh')) {
-                setLanguage('en');
-            } else {
-                setLanguage('zh');
-            }
-        }
-
-        // 设置语言
-        function setLanguage(lang) {
-            const body = document.body;
-            if (lang === 'zh') {
-                body.classList.remove('mode-en');
-                body.classList.add('mode-zh');
-            } else {
-                body.classList.remove('mode-zh');
-                body.classList.add('mode-en');
-            }
-        }
-
-        // 自动检测浏览器语言并设置
-        (function detectBrowserLanguage() {
-            const lang = navigator.language || navigator.userLanguage;
-            if (lang && lang.toLowerCase().startsWith('zh')) {
-                setLanguage('zh');
-            } else {
-                setLanguage('en');
-            }
-        })();
-    </script>
+  <script src="assets/site.js"></script>
 </body>
-
 </html>
