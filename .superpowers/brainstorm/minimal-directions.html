@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minimal Directions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jersey+20&family=Space+Mono:wght@400;700&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f7f3ff;
+      --paper: #fffdfc;
+      --ink: #543d71;
+      --muted: #6f6585;
+      --soft: #e6dcf7;
+      --line: rgba(84, 61, 113, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Noto Sans SC", sans-serif;
+    }
+
+    .page {
+      width: min(1320px, calc(100vw - 48px));
+      margin: 0 auto;
+      padding: 40px 0 64px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-family: "Jersey 20", sans-serif;
+      font-size: 2.2rem;
+      line-height: 1;
+      letter-spacing: 0.04em;
+    }
+
+    .header p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .option {
+      background: rgba(255, 255, 255, 0.72);
+      padding: 24px;
+      border-radius: 28px;
+      box-shadow: 0 14px 40px rgba(84, 61, 113, 0.08);
+      backdrop-filter: blur(4px);
+    }
+
+    .tag {
+      display: inline-block;
+      margin-bottom: 12px;
+      font-family: "Space Mono", monospace;
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .option h2 {
+      margin: 0 0 10px;
+      font-size: 1.6rem;
+      line-height: 1.1;
+    }
+
+    .option > p {
+      margin: 0 0 18px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .mockup {
+      background: var(--paper);
+      border-radius: 24px;
+      padding: 28px;
+      min-height: 780px;
+      box-shadow: inset 0 0 0 1px var(--line);
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 20px;
+      margin-bottom: 64px;
+    }
+
+    .brand {
+      font-family: "Jersey 20", sans-serif;
+      font-size: 2rem;
+      line-height: 1;
+      letter-spacing: 0.04em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    .hero-a {
+      min-height: 340px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 18px;
+      margin-bottom: 92px;
+    }
+
+    .hero-kicker,
+    .small {
+      font-family: "Space Mono", monospace;
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .hero-a h3,
+    .hero-b h3 {
+      margin: 0;
+      font-size: clamp(2.8rem, 5vw, 5rem);
+      line-height: 0.94;
+      letter-spacing: -0.05em;
+      max-width: 6.8ch;
+    }
+
+    .hero-a p,
+    .hero-b p,
+    .flow p,
+    .product-line p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .cta-line {
+      display: flex;
+      gap: 20px;
+      font-weight: 700;
+      margin-top: 8px;
+    }
+
+    .cta-line span:last-child {
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .list-a {
+      display: grid;
+      gap: 26px;
+    }
+
+    .product-line {
+      display: grid;
+      grid-template-columns: 200px 1fr auto;
+      gap: 20px;
+      align-items: baseline;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .product-line strong {
+      font-size: 1.05rem;
+    }
+
+    .product-line em {
+      font-style: normal;
+      font-family: "Space Mono", monospace;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .subpage-a {
+      margin-top: 86px;
+      padding-top: 36px;
+      border-top: 1px solid var(--line);
+    }
+
+    .subpage-a h4,
+    .hero-b h4 {
+      margin: 0 0 12px;
+      font-size: 2rem;
+      line-height: 1;
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 28px;
+      margin-top: 28px;
+    }
+
+    .flow-block {
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
+    }
+
+    .hero-b {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 40px;
+      margin-bottom: 76px;
+      align-items: end;
+    }
+
+    .hero-b .note {
+      max-width: 22ch;
+      font-size: 1rem;
+    }
+
+    .list-b {
+      display: grid;
+      gap: 48px;
+      margin-bottom: 86px;
+    }
+
+    .list-b article {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 24px;
+    }
+
+    .list-b strong {
+      display: block;
+      font-size: 1.55rem;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .subpage-b {
+      display: grid;
+      gap: 24px;
+      padding-top: 36px;
+      border-top: 1px solid var(--line);
+    }
+
+    .subpage-b-head {
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .subpage-b-head h4 {
+      margin: 0;
+      font-size: 2.5rem;
+      line-height: 0.96;
+      max-width: 8ch;
+    }
+
+    .subpage-b-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .subpage-b-grid div {
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
+    }
+
+    @media (max-width: 1100px) {
+      .split {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="header">
+      <div>
+        <h1>Minimalism Without Bento</h1>
+        <p>选一个更接近你想要的方向。重点是所有页面都走这个气质，不只是首页。</p>
+      </div>
+      <p>请在终端回复 `A` 或 `B`，或者说你想混合哪一部分。</p>
+    </div>
+
+    <div class="split">
+      <section class="option">
+        <div class="tag">Option A</div>
+        <h2>极简海报感</h2>
+        <p>留白更多，首页像一张大海报。产品列表是清单，不再是分块卡片。子页也走“一大段标题 + 流水段落”的做法。</p>
+        <div class="mockup">
+          <div class="nav">
+            <div>
+              <div class="brand">FIGURICH</div>
+              <div class="small">AI for personal wellbeing</div>
+            </div>
+            <div class="nav-links">
+              <span>Home</span>
+              <span>Products</span>
+              <span>Book</span>
+            </div>
+          </div>
+
+          <div class="hero-a">
+            <div class="hero-kicker">数字狂徒 | AI 个人健康</div>
+            <h3>用 AI 帮你把个人健康重新接回生活里。</h3>
+            <p>我现在做了 5 个东西，你先看哪个对你有用。</p>
+            <div class="cta-line">
+              <span>预约沟通</span>
+              <span>看看这 5 个东西</span>
+            </div>
+          </div>
+
+          <div class="list-a">
+            <div class="product-line">
+              <strong>OpenClaw / NanoClaw</strong>
+              <p>如果你想让提醒、记录和反馈真的发生在生活里，这个最接近。</p>
+              <em>先看这个</em>
+            </div>
+            <div class="product-line">
+              <strong>Focus Kit</strong>
+              <p>如果你最近有点乱，可以先从这个开始。</p>
+              <em>查看</em>
+            </div>
+            <div class="product-line">
+              <strong>内容自动化工具包</strong>
+              <p>适合想稳定更新，但又不想每次都从零开始的人。</p>
+              <em>查看</em>
+            </div>
+            <div class="product-line">
+              <strong>个人品牌与 OPC</strong>
+              <p>适合已经开始输出，想把自己的东西慢慢搭起来的人。</p>
+              <em>查看</em>
+            </div>
+          </div>
+
+          <div class="subpage-a">
+            <div class="small">Subpage example</div>
+            <h4>内容自动化工具包</h4>
+            <div class="flow">
+              <div class="flow-block"><strong>适合谁</strong></div>
+              <div class="flow-block"><p>适合已经有素材、但常常卡在开始写、反复改、发布动作太散的人。</p></div>
+              <div class="flow-block"><strong>它做什么</strong></div>
+              <div class="flow-block"><p>把选题、草稿、润色、发布串起来，让稳定输出不再只靠临时兴奋和硬撑。</p></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="option">
+        <div class="tag">Option B</div>
+        <h2>极简编辑感</h2>
+        <p>仍然无边框，但更像一本小杂志。首页用大字 + 编排节奏，子页用左右关系和三栏文字，不再是一条直下的清单。</p>
+        <div class="mockup">
+          <div class="nav">
+            <div>
+              <div class="brand">FIGURICH</div>
+              <div class="small">AI for personal wellbeing</div>
+            </div>
+            <div class="nav-links">
+              <span>Home</span>
+              <span>Focus</span>
+              <span>OpenClaw</span>
+            </div>
+          </div>
+
+          <div class="hero-b">
+            <div>
+              <div class="hero-kicker">数字狂徒 | AI 个人健康</div>
+              <h3>用 AI 帮你把个人健康重新接回生活里。</h3>
+            </div>
+            <p class="note">我现在做了 5 个东西。你可以从最像你现在问题的那个开始。</p>
+          </div>
+
+          <div class="list-b">
+            <article>
+              <div>
+                <strong>01</strong>
+                <div class="small">OpenClaw / NanoClaw</div>
+              </div>
+              <p>如果你想让提醒、记录和反馈真的发生在生活里，这个最接近。home camera、home speaker、skills 和 plugins 都会一起用上。</p>
+            </article>
+            <article>
+              <div>
+                <strong>02</strong>
+                <div class="small">Focus Kit</div>
+              </div>
+              <p>如果你最近有点乱，可以先从这个开始。先把注意力和作息拉回来，再决定后面的东西。</p>
+            </article>
+            <article>
+              <div>
+                <strong>03</strong>
+                <div class="small">Content</div>
+              </div>
+              <p>适合想稳定更新，但又不想每次都从零开始的人。重点是节奏，不是堆功能。</p>
+            </article>
+          </div>
+
+          <div class="subpage-b">
+            <div class="small">Subpage example</div>
+            <div class="subpage-b-head">
+              <h4>内容自动化工具包</h4>
+              <p>这个工具包服务于“稳定输出”这件事。不是为了更卷，而是为了少一点内耗。</p>
+            </div>
+            <div class="subpage-b-grid">
+              <div>
+                <strong>适合谁</strong>
+                <p>已经有素材，但输出常常断断续续。</p>
+              </div>
+              <div>
+                <strong>它做什么</strong>
+                <p>把选题、草稿、润色、发布串成更顺的流程。</p>
+              </div>
+              <div>
+                <strong>怎么进入</strong>
+                <p>以后会直接连到 GitHub，不再解释太多。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</body>
+</html>
