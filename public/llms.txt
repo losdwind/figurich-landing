@@ -1,0 +1,20 @@
+# Figurich (数字狂徒)
+
+> Figurich is an AI-powered personal wellbeing platform. It offers five integrated products designed to help individuals reconnect attention, habits, daily rhythm, output, and support with real life — not more screen time, not more productivity hacks.
+
+## Products
+
+- [Focus & Digital Detox Kit](https://figurich.com/focus-kit/): The lightest entry point. Combines a digital detox playbook, low-noise content subscription, and simple rhythm prompts to calm the input layer first.
+- [OpenClaw Health Kit](https://figurich.com/openclaw-health/): The flagship smart-home health layer. Uses home camera, home speaker, skills, and plugins to bring reminders, observation, tracking, and feedback into your real environment.
+- [Content Automation Kit](https://figurich.com/content-creation-kit/): Turns topic selection, drafting, polishing, and publishing into a reusable flow instead of relying on occasional bursts.
+- [Personal Branding & OPC Kit](https://figurich.com/personal-branding/): Organises your rhythm, perspective, content, and long-term expression into a stable structure with owned channels and connection paths.
+- [Companion Group](https://figurich.com/vip-companion/): The highest-touch support layer for people who know the direction but need feedback, Q&A, structure, and steady companionship while executing.
+
+## About
+
+Figurich (数字狂徒) approaches personal wellbeing through five layers — from calming digital noise (Focus Kit) to embedding AI health tracking in your home (OpenClaw), streamlining content output, building a personal brand, and offering ongoing human support. The products are designed to work together progressively but each can be adopted independently.
+
+## Links
+
+- Website: https://figurich.com
+- Newsletter: https://figurich.substack.com/

@@ -515,7 +515,6 @@ body.mode-zh .page-title {
 
 .text-section-grid {
   display: grid;
-  grid-template-columns: 148px minmax(0, 1fr);
   gap: 24px;
   align-items: start;
 }
@@ -610,9 +609,90 @@ body.mode-zh .page-title {
   border: 0;
 }
 
+/* ── Answer-first intro (index hero) ── */
+
+.poster-intro {
+  max-width: 62ch;
+  margin: 16px 0 0;
+  padding: 14px 18px;
+  background: var(--accent-soft);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 6px 6px 0;
+  font-size: 0.96rem;
+  line-height: 1.82;
+  color: var(--text);
+  text-wrap: pretty;
+}
+
+/* ── FAQ section ── */
+
+.faq-section {
+  padding: 32px 0 48px;
+}
+
+.faq-list {
+  margin-top: 16px;
+}
+
+.faq-item {
+  padding: 16px 0;
+  box-shadow: inset 0 1px 0 var(--line);
+}
+
+.faq-item:last-child {
+  box-shadow: inset 0 1px 0 var(--line), inset 0 -1px 0 var(--line);
+}
+
+.faq-question {
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1.04rem;
+  color: var(--accent);
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.faq-question::-webkit-details-marker {
+  display: none;
+}
+
+.faq-question::after {
+  content: '+';
+  font-family: 'Space Mono', monospace;
+  font-size: 1.2rem;
+  color: var(--muted);
+  flex-shrink: 0;
+  transition: transform 200ms ease-out;
+}
+
+details[open] > .faq-question::after {
+  content: '\2212';
+}
+
+.faq-answer {
+  margin-top: 10px;
+  max-width: 60ch;
+  color: var(--muted);
+  line-height: 1.82;
+  text-wrap: pretty;
+}
+
+/* ── Freshness date ── */
+
+.freshness-date {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  opacity: 0.7;
+}
+
 @media (max-width: 1024px) {
   .page-hero-layout,
-  .text-section-grid,
   .product-row {
     grid-template-columns: 1fr;
   }

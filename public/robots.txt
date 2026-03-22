@@ -1,0 +1,8 @@
+# Figurich — AI for personal wellbeing
+# All crawlers welcome, including AI bots
+# (ChatGPT-User, GPTBot, PerplexityBot, ClaudeBot, Google-Extended, CCBot)
+
+User-agent: *
+Allow: /
+
+Sitemap: https://figurich.com/sitemap.xml
