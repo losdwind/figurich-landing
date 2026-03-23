@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(for f:*)",
+      "Bash(do echo:*)",
+      "Read(//home/figurich/CodeProjects/figurich-landing/**)",
+      "Bash(python3 -c \"import sys,json; [json.loads\\(block\\) for block in sys.stdin.read\\(\\).split\\(''''}''''+''''  \\\\n  <script type=\"\"application/ld+json\"\">\\\\n  {''''\\)]\")",
+      "Bash(done)"
+    ]
+  }
+}
